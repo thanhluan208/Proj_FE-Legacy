@@ -1,0 +1,13 @@
+{
+	"Login": {
+		"title": "TourPlanet",
+		"login": "เข้าสู่ระบบ",
+		"username": "ผู้ใช้",
+		"username_placeholder": "กรอกชื่อผู้ใช้ของคุณ",
+		"password": "รหัสผ่าน",
+		"password_placeholder": "กรอกรหัสผ่านของคุณ",
+		"remember_me": "จดจำฉัน",
+		"sign_in": "ลงชื่อเข้าใช้",
+		"forgot_password": "ลืมรหัสผ่าน"
+	}
+}

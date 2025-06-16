@@ -1,0 +1,8 @@
+services:
+  alphii_ai_fe:
+    image: alphiife/main-page:v1.1.1
+    build:
+      context: .
+      dockerfile: ./Dockerfile.v2
+    ports:
+      - 8888:3000
