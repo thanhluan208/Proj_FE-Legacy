@@ -1,138 +1,94 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@font-face {
-	font-family: "Nico Moji";
-	src: url("/fonts/NicoMoji-Regular.ttf") format("truetype");
-	font-weight: normal;
-	font-style: normal;
-}
-
 @layer base {
 	:root {
-		--radius: 0.625rem;
-		--background: #fcfcfd;
-		--foreground: oklch(0.145 0 0);
-		--card: #ffffff;
-		--card-foreground: oklch(0.145 0 0);
-		--popover: oklch(1 0 0);
-		--popover-foreground: oklch(0.145 0 0);
-		--primary: oklch(0.205 0 0);
-		--primary-foreground: oklch(0.985 0 0);
-		--secondary: oklch(0.97 0 0);
-		--secondary-foreground: oklch(0.205 0 0);
-		--muted: oklch(0.97 0 0);
-		--muted-foreground: oklch(0.556 0 0);
-		--accent: oklch(0.97 0 0);
-		--accent-foreground: oklch(0.205 0 0);
-		--destructive: oklch(0.65 0.23 22.47);
-		--border: oklch(0.922 0 0);
-		--input: oklch(0.922 0 0);
-		--ring: oklch(0.708 0 0);
-		--chart-1: oklch(0.646 0.222 41.116);
-		--chart-2: oklch(0.6 0.118 184.704);
-		--chart-3: oklch(0.398 0.07 227.392);
-		--chart-4: oklch(0.828 0.189 84.429);
-		--chart-5: oklch(0.769 0.188 70.08);
-		--sidebar: oklch(0.985 0 0);
-		--sidebar-foreground: oklch(0.145 0 0);
-		--sidebar-primary: oklch(0.205 0 0);
-		--sidebar-primary-foreground: oklch(0.985 0 0);
-		--sidebar-accent: oklch(0.97 0 0);
-		--sidebar-accent-foreground: oklch(0.205 0 0);
-		--sidebar-border: oklch(0.922 0 0);
-		--sidebar-ring: oklch(0.708 0 0);
-
-		--alphii-primary: #4c46e7;
-		--alphii-primary-50: #24237180;
-		--alpgii-primary-light: #f2f2ff;
-		--alphii-border: #d8d9e0;
-		--alphii-text-sub-600: #5c5c5c;
-		--alphii-skeleton: #eff0f3;
-		--alphii-border-2: #ebebeb;
-		--alphii-bg-soft-200: #ebebeb;
-		--alphii-bg-strong-950: #171717;
-		--alphii-bg-weak-50: #f7f7f7;
-		--alphii-bg-weak-40: #f9f9fb;
-		--alphii-destructive-light: #ffebec;
+	  /* Radius */
+	  --radius: 0.625rem;
+  
+	  /* Background / Foreground */
+	  --background: #fcfcfd;
+	  --foreground: #1A2A47;
+  
+	  /* Primary (Navy) Palette */
+	  --primary-10: #f4f6fa;
+	  --primary-20: #dbe1ec;
+	  --primary-30: #b2bad0;
+	  --primary-40: #8993b4;
+	  --primary-50: #606c98;
+	  --primary-60: #38457c;
+	  --primary-70: #2e3966;
+	  --primary-80: #242e51;
+	  --primary-90: #1b223b;
+	  --primary-100: #1A2A47;
+  
+	  /* Secondary (Coral) Palette */
+	  --secondary-10: #fff5f4;
+	  --secondary-20: #ffe0dd;
+	  --secondary-30: #ffb8b0;
+	  --secondary-40: #ff9083;
+	  --secondary-50: #ff6856;
+	  --secondary-60: #ff4f3b;
+	  --secondary-70: #e6442f;
+	  --secondary-80: #cc3a28;
+	  --secondary-90: #b33021;
+	  --secondary-100: #FF6F61;
+  
+	  /* Neutral (Soft Black) Palette */
+	  --neutral-10: #f5f5f5;
+	  --neutral-20: #e5e5e5;
+	  --neutral-30: #d4d4d4;
+	  --neutral-40: #a3a3a3;
+	  --neutral-50: #737373;
+	  --neutral-60: #525252;
+	  --neutral-70: #404040;
+	  --neutral-80: #262626;
+	  --neutral-90: #1e1e1e;
+	  --neutral-100: #141414;
+  
+	  /* Neutral Foreground (Contrast for Neutral) */
+	  --neutral-foreground: #ffffff;
 	}
-
+  
 	.dark {
-		--background: oklch(0.145 0 0);
-		--foreground: oklch(0.985 0 0);
-		--card: #000000;
-		--card-foreground: oklch(0.985 0 0);
-		--popover: oklch(0.269 0 0);
-		--popover-foreground: oklch(0.985 0 0);
-		--primary: oklch(0.922 0 0);
-		--primary-foreground: oklch(0.205 0 0);
-		--secondary: oklch(0.269 0 0);
-		--secondary-foreground: oklch(0.985 0 0);
-		--muted: oklch(0.269 0 0);
-		--muted-foreground: oklch(0.708 0 0);
-		--accent: oklch(0.371 0 0);
-		--accent-foreground: oklch(0.985 0 0);
-		--destructive: oklch(0.704 0.191 22.216);
-		--border: oklch(1 0 0 / 10%);
-		--input: oklch(1 0 0 / 15%);
-		--ring: oklch(0.556 0 0);
-		--chart-1: oklch(0.488 0.243 264.376);
-		--chart-2: oklch(0.696 0.17 162.48);
-		--chart-3: oklch(0.769 0.188 70.08);
-		--chart-4: oklch(0.627 0.265 303.9);
-		--chart-5: oklch(0.645 0.246 16.439);
-		--sidebar: oklch(0.205 0 0);
-		--sidebar-foreground: oklch(0.985 0 0);
-		--sidebar-primary: oklch(0.488 0.243 264.376);
-		--sidebar-primary-foreground: oklch(0.985 0 0);
-		--sidebar-accent: oklch(0.269 0 0);
-		--sidebar-accent-foreground: oklch(0.985 0 0);
-		--sidebar-border: oklch(1 0 0 / 10%);
-		--sidebar-ring: oklch(0.439 0 0);
-
-		--alphii-primary: #6e68f8;
-		--alphii-primary-50: #6e68f880;
-		--alpgii-primary-light: #1e1c42;
-		--alphii-border: #3a3a45;
-		--alphii-text-sub-600: #b0b0b0;
-		--alphii-skeleton: #2a2a30;
-		--alphii-border-2: #333340;
-		--alphii-bg-soft-200: #282830;
-		--alphii-bg-strong-950: #f5f5f5;
-		--alphii-bg-weak-50: #1c1c24;
-		--alphii-bg-weak-40: #18181c;
-		--alphii-destructive-light: #ffebec;
-
-		--alphii-background: #121218;
-		--alphii-text-main: #e6e6e6;
+	  --background: #1A2A47;
+	  --foreground: #fcfcfd;
+  
+	  /* Primary - Dark Mode */
+	  --primary-10: #1b223b;
+	  --primary-20: #242e51;
+	  --primary-30: #2e3966;
+	  --primary-40: #38457c;
+	  --primary-50: #606c98;
+	  --primary-60: #8993b4;
+	  --primary-70: #b2bad0;
+	  --primary-80: #dbe1ec;
+	  --primary-90: #f4f6fa;
+	  --primary-100: #fcfcfd;
+  
+	  /* Secondary - Dark Mode */
+	  --secondary-10: #b33021;
+	  --secondary-20: #cc3a28;
+	  --secondary-30: #e6442f;
+	  --secondary-40: #ff4f3b;
+	  --secondary-50: #ff6856;
+	  --secondary-60: #ff9083;
+	  --secondary-70: #ffb8b0;
+	  --secondary-80: #ffe0dd;
+	  --secondary-90: #fff5f4;
+	  --secondary-100: #fcfcfd;
+  
+	  /* Neutral - Dark Mode (Light Gray) */
+	  --neutral-10: #141414;
+	  --neutral-20: #1e1e1e;
+	  --neutral-30: #262626;
+	  --neutral-40: #404040;
+	  --neutral-50: #525252;
+	  --neutral-60: #737373;
+	  --neutral-70: #a3a3a3;
+	  --neutral-80: #d4d4d4;
+	  --neutral-90: #e5e5e5;
+	  --neutral-100: #f5f5f5;
+  
+	  /* Neutral Foreground (Contrast for Neutral) */
+	  --neutral-foreground: #000000;
 	}
-}
-
-@layer base {
-	* {
-		@apply border-border;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
-}
-
-@layer base {
-	* {
-		@apply border-border outline-ring/50;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
-}
-.no-scrollbar {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
-}
-
-@media (max-height: 650px) {
-	.top-character {
-		display: none !important;
-	}
-}
+  }
+  
