@@ -1,94 +1,226 @@
-@layer base {
-	:root {
-	  /* Radius */
-	  --radius: 0.625rem;
-  
-	  /* Background / Foreground */
-	  --background: #fcfcfd;
-	  --foreground: #1A2A47;
-  
-	  /* Primary (Navy) Palette */
-	  --primary-10: #f4f6fa;
-	  --primary-20: #dbe1ec;
-	  --primary-30: #b2bad0;
-	  --primary-40: #8993b4;
-	  --primary-50: #606c98;
-	  --primary-60: #38457c;
-	  --primary-70: #2e3966;
-	  --primary-80: #242e51;
-	  --primary-90: #1b223b;
-	  --primary-100: #1A2A47;
-  
-	  /* Secondary (Coral) Palette */
-	  --secondary-10: #fff5f4;
-	  --secondary-20: #ffe0dd;
-	  --secondary-30: #ffb8b0;
-	  --secondary-40: #ff9083;
-	  --secondary-50: #ff6856;
-	  --secondary-60: #ff4f3b;
-	  --secondary-70: #e6442f;
-	  --secondary-80: #cc3a28;
-	  --secondary-90: #b33021;
-	  --secondary-100: #FF6F61;
-  
-	  /* Neutral (Soft Black) Palette */
-	  --neutral-10: #f5f5f5;
-	  --neutral-20: #e5e5e5;
-	  --neutral-30: #d4d4d4;
-	  --neutral-40: #a3a3a3;
-	  --neutral-50: #737373;
-	  --neutral-60: #525252;
-	  --neutral-70: #404040;
-	  --neutral-80: #262626;
-	  --neutral-90: #1e1e1e;
-	  --neutral-100: #141414;
-  
-	  /* Neutral Foreground (Contrast for Neutral) */
-	  --neutral-foreground: #ffffff;
-	}
-  
-	.dark {
-	  --background: #1A2A47;
-	  --foreground: #fcfcfd;
-  
-	  /* Primary - Dark Mode */
-	  --primary-10: #1b223b;
-	  --primary-20: #242e51;
-	  --primary-30: #2e3966;
-	  --primary-40: #38457c;
-	  --primary-50: #606c98;
-	  --primary-60: #8993b4;
-	  --primary-70: #b2bad0;
-	  --primary-80: #dbe1ec;
-	  --primary-90: #f4f6fa;
-	  --primary-100: #fcfcfd;
-  
-	  /* Secondary - Dark Mode */
-	  --secondary-10: #b33021;
-	  --secondary-20: #cc3a28;
-	  --secondary-30: #e6442f;
-	  --secondary-40: #ff4f3b;
-	  --secondary-50: #ff6856;
-	  --secondary-60: #ff9083;
-	  --secondary-70: #ffb8b0;
-	  --secondary-80: #ffe0dd;
-	  --secondary-90: #fff5f4;
-	  --secondary-100: #fcfcfd;
-  
-	  /* Neutral - Dark Mode (Light Gray) */
-	  --neutral-10: #141414;
-	  --neutral-20: #1e1e1e;
-	  --neutral-30: #262626;
-	  --neutral-40: #404040;
-	  --neutral-50: #525252;
-	  --neutral-60: #737373;
-	  --neutral-70: #a3a3a3;
-	  --neutral-80: #d4d4d4;
-	  --neutral-90: #e5e5e5;
-	  --neutral-100: #f5f5f5;
-  
-	  /* Neutral Foreground (Contrast for Neutral) */
-	  --neutral-foreground: #000000;
-	}
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Design tokens */
+  --radius: 0.625rem;
+
+  /* Color palette - Light theme (default) */
+  --background: #fcfcfd;
+  --foreground: #1a2a47;
+
+  /* Primary colors */
+  --primary: #38457c;
+  --primary-foreground: #ffffff;
+
+  /* Secondary colors */
+  --secondary: #ff6856;
+  --secondary-foreground: #ffffff;
+
+  /* System colors */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --warning: oklch(0.84 0.16 84);
+  --warning-foreground: oklch(0.28 0.07 46);
+
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+
+  --card: #fcfcfd;
+  --card-foreground: #1a2a47;
+
+  --popover: #fcfcfd;
+  --popover-foreground: #1a2a47;
+
+  --accent: #f4f6fa;
+  --accent-foreground: #1a2a47;
+
+  --border: #e5e5e5;
+  --input: #d4d4d4;
+  --ring: #38457c;
+
+  /* Custom application colors */
+  --alphii-border: #d4d4d4;
+
+  /* Primary (Navy) scale */
+  --primary-10: #f4f6fa;
+  --primary-20: #dbe1ec;
+  --primary-30: #b2bad0;
+  --primary-40: #8993b4;
+  --primary-50: #606c98;
+  --primary-60: #38457c;
+  --primary-70: #2e3966;
+  --primary-80: #242e51;
+  --primary-90: #1b223b;
+  --primary-100: #1a2a47;
+
+  /* Secondary (Coral) scale */
+  --secondary-10: #fff5f4;
+  --secondary-20: #ffe0dd;
+  --secondary-30: #ffb8b0;
+  --secondary-40: #ff9083;
+  --secondary-50: #ff6856;
+  --secondary-60: #ff4f3b;
+  --secondary-70: #e6442f;
+  --secondary-80: #cc3a28;
+  --secondary-90: #b33021;
+  --secondary-100: #ff6f61;
+
+  /* Neutral (Soft Black) scale */
+  --neutral-10: #f5f5f5;
+  --neutral-20: #e5e5e5;
+  --neutral-30: #d4d4d4;
+  --neutral-40: #a3a3a3;
+  --neutral-50: #737373;
+  --neutral-60: #525252;
+  --neutral-70: #404040;
+  --neutral-80: #262626;
+  --neutral-90: #1e1e1e;
+  --neutral-100: #141414;
+
+  --neutral-foreground: #ffffff;
+}
+
+/* Dark theme variant */
+.dark {
+  --background: #1a2a47;
+  --foreground: #fcfcfd;
+
+  /* Adjusted semantic colors for dark mode */
+  --primary: #8993b4;
+  --primary-foreground: #1a2a47;
+
+  --secondary: #ff9083;
+  --secondary-foreground: #1a2a47;
+
+  --destructive: #f87171;
+  --destructive-foreground: #1a2a47;
+
+  --warning: oklch(0.41 0.11 46);
+  --warning-foreground: oklch(0.99 0.02 95);
+
+  --muted: #1e1e1e;
+  --muted-foreground: #a3a3a3;
+
+  --card: #1e1e1e;
+  --card-foreground: #fcfcfd;
+
+  --popover: #1e1e1e;
+  --popover-foreground: #fcfcfd;
+
+  --accent: #242e51;
+  --accent-foreground: #f4f6fa;
+
+  --border: #404040;
+  --input: #404040;
+  --ring: #8993b4;
+
+  --alphii-border: #404040;
+
+  /* Primary scale - inverted for dark mode */
+  --primary-10: #1b223b;
+  --primary-20: #242e51;
+  --primary-30: #2e3966;
+  --primary-40: #38457c;
+  --primary-50: #606c98;
+  --primary-60: #8993b4;
+  --primary-70: #b2bad0;
+  --primary-80: #dbe1ec;
+  --primary-90: #f4f6fa;
+  --primary-100: #fcfcfd;
+
+  /* Secondary scale - inverted for dark mode */
+  --secondary-10: #b33021;
+  --secondary-20: #cc3a28;
+  --secondary-30: #e6442f;
+  --secondary-40: #ff4f3b;
+  --secondary-50: #ff6856;
+  --secondary-60: #ff9083;
+  --secondary-70: #ffb8b0;
+  --secondary-80: #ffe0dd;
+  --secondary-90: #fff5f4;
+  --secondary-100: #fcfcfd;
+
+  /* Neutral scale - inverted for dark mode */
+  --neutral-10: #141414;
+  --neutral-20: #1e1e1e;
+  --neutral-30: #262626;
+  --neutral-40: #404040;
+  --neutral-50: #525252;
+  --neutral-60: #737373;
+  --neutral-70: #a3a3a3;
+  --neutral-80: #d4d4d4;
+  --neutral-90: #e5e5e5;
+  --neutral-100: #f5f5f5;
+
+  --neutral-foreground: #000000;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-alphii-border: var(--alphii-border);
+  --color-primary-10: var(--primary-10);
+  --color-primary-20: var(--primary-20);
+  --color-primary-30: var(--primary-30);
+  --color-primary-40: var(--primary-40);
+  --color-primary-50: var(--primary-50);
+  --color-primary-60: var(--primary-60);
+  --color-primary-70: var(--primary-70);
+  --color-primary-80: var(--primary-80);
+  --color-primary-90: var(--primary-90);
+  --color-primary-100: var(--primary-100);
+  --color-secondary-10: var(--secondary-10);
+  --color-secondary-20: var(--secondary-20);
+  --color-secondary-30: var(--secondary-30);
+  --color-secondary-40: var(--secondary-40);
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-60: var(--secondary-60);
+  --color-secondary-70: var(--secondary-70);
+  --color-secondary-80: var(--secondary-80);
+  --color-secondary-90: var(--secondary-90);
+  --color-secondary-100: var(--secondary-100);
+  --color-neutral-10: var(--neutral-10);
+  --color-neutral-20: var(--neutral-20);
+  --color-neutral-30: var(--neutral-30);
+  --color-neutral-40: var(--neutral-40);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-60: var(--neutral-60);
+  --color-neutral-70: var(--neutral-70);
+  --color-neutral-80: var(--neutral-80);
+  --color-neutral-90: var(--neutral-90);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-foreground: var(--neutral-foreground);
+}
+
+/* Utility classes */
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
-  
+}
