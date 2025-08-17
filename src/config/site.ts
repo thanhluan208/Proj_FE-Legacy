@@ -1,5 +1,5 @@
 export const siteConfig = {
-	title: "Proj.io",
+	title: "Doorly",
 	description:''
 	
 }

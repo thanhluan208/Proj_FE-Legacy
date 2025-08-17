@@ -1,20 +1,22 @@
-export const languages = ["en", "th"]
+export const languages = ["en", "vi"]
 
 export const ACCESS_TOKEN = "access_token"
 export const REFRESH_TOKEN = "refresh_token"
+export const VERIFY_OTP_KEY = "verify_otp"
+export const VERIFY_OTP_COOLDOWN = 300 // In seconds
 export const BASE_URL = process.env.BASE_URL || "http://backend-default"
 export const NEXT_LOCALE = "NEXT_LOCALE"
 export const DEFAULT_INIT_PAGE = "1"
 
 export const Routes = {
 	ROOT: "/",
-	SHOWCASE: "/showcases",
-	PROJECT: "/project",
-	STUDIO: "/studio",
+	
 	LOGIN: "/login",
 	REGISTER: "/register",
 	FORGOT_PASSWORD: "/forgot-password",
 	RESET_PASSWORD: "/reset-password",
+	VERIFY_OTP: "/verify-otp",
+
 	GOOGLE_LOGIN: "http://localhost:8000/auth/google",
 	GITHUB_LOGIN: "http://localhost:8000/auth/github",
 	SOCIAL_LOGIN_ORIGIN: "http://localhost:8000"

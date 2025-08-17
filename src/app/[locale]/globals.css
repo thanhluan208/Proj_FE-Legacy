@@ -10,11 +10,11 @@
   --foreground: #1a2a47;
 
   /* Primary colors */
-  --primary: #38457c;
+  --secondary: #38457c;
   --primary-foreground: #ffffff;
 
   /* Secondary colors */
-  --secondary: #ff6856;
+  --primary: #ff6856;
   --secondary-foreground: #ffffff;
 
   /* System colors */
@@ -44,28 +44,28 @@
   --alphii-border: #d4d4d4;
 
   /* Primary (Navy) scale */
-  --primary-10: #f4f6fa;
-  --primary-20: #dbe1ec;
-  --primary-30: #b2bad0;
-  --primary-40: #8993b4;
-  --primary-50: #606c98;
-  --primary-60: #38457c;
-  --primary-70: #2e3966;
-  --primary-80: #242e51;
-  --primary-90: #1b223b;
-  --primary-100: #1a2a47;
+  --secondary-10: #f4f6fa;
+  --secondary-20: #dbe1ec;
+  --secondary-30: #b2bad0;
+  --secondary-40: #8993b4;
+  --secondary-50: #606c98;
+  --secondary-60: #38457c;
+  --secondary-70: #2e3966;
+  --secondary-80: #242e51;
+  --secondary-90: #1b223b;
+  --secondary-100: #1a2a47;
 
   /* Secondary (Coral) scale */
-  --secondary-10: #fff5f4;
-  --secondary-20: #ffe0dd;
-  --secondary-30: #ffb8b0;
-  --secondary-40: #ff9083;
-  --secondary-50: #ff6856;
-  --secondary-60: #ff4f3b;
-  --secondary-70: #e6442f;
-  --secondary-80: #cc3a28;
-  --secondary-90: #b33021;
-  --secondary-100: #ff6f61;
+  --primary-10: #fff5f4;
+  --primary-20: #ffe0dd;
+  --primary-30: #ffb8b0;
+  --primary-40: #ff9083;
+  --primary-50: #ff6856;
+  --primary-60: #ff4f3b;
+  --primary-70: #e6442f;
+  --primary-80: #cc3a28;
+  --primary-90: #b33021;
+  --primary-100: #ff6f61;
 
   /* Neutral (Soft Black) scale */
   --neutral-10: #f5f5f5;
@@ -88,11 +88,11 @@
   --foreground: #fcfcfd;
 
   /* Adjusted semantic colors for dark mode */
-  --primary: #8993b4;
-  --primary-foreground: #1a2a47;
-
-  --secondary: #ff9083;
+  --secondary: #8993b4;
   --secondary-foreground: #1a2a47;
+
+  --primary: #ff9083;
+  --primary-foreground: #1a2a47;
 
   --destructive: #f87171;
   --destructive-foreground: #1a2a47;
@@ -119,28 +119,28 @@
   --alphii-border: #404040;
 
   /* Primary scale - inverted for dark mode */
-  --primary-10: #1b223b;
-  --primary-20: #242e51;
-  --primary-30: #2e3966;
-  --primary-40: #38457c;
-  --primary-50: #606c98;
-  --primary-60: #8993b4;
-  --primary-70: #b2bad0;
-  --primary-80: #dbe1ec;
-  --primary-90: #f4f6fa;
-  --primary-100: #fcfcfd;
+  --secondary-10: #1b223b;
+  --secondary-20: #242e51;
+  --secondary-30: #2e3966;
+  --secondary-40: #38457c;
+  --secondary-50: #606c98;
+  --secondary-60: #8993b4;
+  --secondary-70: #b2bad0;
+  --secondary-80: #dbe1ec;
+  --secondary-90: #f4f6fa;
+  --secondary-100: #fcfcfd;
 
   /* Secondary scale - inverted for dark mode */
-  --secondary-10: #b33021;
-  --secondary-20: #cc3a28;
-  --secondary-30: #e6442f;
-  --secondary-40: #ff4f3b;
-  --secondary-50: #ff6856;
-  --secondary-60: #ff9083;
-  --secondary-70: #ffb8b0;
-  --secondary-80: #ffe0dd;
-  --secondary-90: #fff5f4;
-  --secondary-100: #fcfcfd;
+  --primary-10: #b33021;
+  --primary-20: #cc3a28;
+  --primary-30: #e6442f;
+  --primary-40: #ff4f3b;
+  --primary-50: #ff6856;
+  --primary-60: #ff9083;
+  --primary-70: #ffb8b0;
+  --primary-80: #ffe0dd;
+  --primary-90: #fff5f4;
+  --primary-100: #fcfcfd;
 
   /* Neutral scale - inverted for dark mode */
   --neutral-10: #141414;

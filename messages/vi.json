@@ -1,0 +1,101 @@
+{
+  "common": {
+    "error": "Đã xảy ra lỗi, vui lòng thử lại sau",
+    "success": "Thành công",
+    "loading": "Đang tải...",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "confirm": "Xác nhận",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "next": "Tiếp theo",
+    "submit": "Gửi",
+    "search": "Tìm kiếm",
+    "noResults": "Không có kết quả",
+    "loadingMore": "Đang tải thêm...",
+    "retry": "Thử lại",
+    "viewDetails": "Xem chi tiết",
+    "actions": "Hành động"
+  },
+  "auth": {
+    "login": {
+      "title": "Đăng nhập để tiếp tục",
+      "subtitle": "Vui lòng đăng nhập vào ứng dụng cho thuê của bạn",
+      "email": "Email",
+      "password": "Mật khẩu",
+      "forgotPassword": "Quên mật khẩu?",
+      "resetPassword": "Đặt lại tại đây",
+      "signInButton": "Đăng nhập",
+      "orContinueWith": "Hoặc tiếp tục với",
+      "google": "Google",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "noAccount": "Chưa có tài khoản?",
+      "signUp": "Đăng ký",
+      "placeholders": {
+        "email": "Nhập địa chỉ email của bạn",
+        "password": "Nhập mật khẩu của bạn"
+      }
+    },
+    "register": {
+      "title": "Tạo tài khoản của bạn",
+      "subtitle": "Tham gia nền tảng quản lý bất động sản của chúng tôi",
+      "firstName": "Tên",
+      "lastName": "Họ",
+      "email": "Email",
+      "password": "Mật khẩu",
+      "confirmPassword": "Xác nhận mật khẩu",
+      "phoneNumber": "Số điện thoại",
+      "registerButton": "Tạo tài khoản",
+      "orContinueWith": "Hoặc tiếp tục với",
+      "google": "Google",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "haveAccount": "Đã có tài khoản?",
+      "signIn": "Đăng nhập",
+      "placeholders": {
+        "firstName": "Nhập tên của bạn",
+        "lastName": "Nhập họ của bạn",
+        "email": "Nhập địa chỉ email của bạn",
+        "password": "Tạo mật khẩu mạnh",
+        "confirmPassword": "Xác nhận mật khẩu của bạn",
+        "phoneNumber": "Nhập số điện thoại của bạn (tùy chọn)"
+      }
+    },
+    "verifyOtp": {
+      "title": "Xác thực email của bạn",
+      "subtitle": "Chúng tôi đã gửi mã xác thực đến địa chỉ email của bạn",
+      "enterCode": "Nhập mã xác thực",
+      "codeLength": "Vui lòng nhập đủ 6 chữ số",
+      "verifyButton": "Xác thực",
+      "resendCode": "Chưa nhận được mã?",
+      "resendLink": "Gửi lại mã",
+      "backToLogin": "Quay lại đăng nhập",
+      "noEmail": "Không có email nào được cung cấp để xác thực"
+    },
+    "validation": {
+      "invalidEmail": "Địa chỉ email không hợp lệ",
+      "emailRequired": "Email là bắt buộc",
+      "passwordMinLength": "Mật khẩu phải có ít nhất 8 ký tự",
+      "passwordMaxLength": "Mật khẩu không được vượt quá 128 ký tự",
+      "passwordPattern": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một số và một ký tự đặc biệt",
+      "passwordRequired": "Mật khẩu là bắt buộc",
+      "confirmPasswordRequired": "Xác nhận mật khẩu là bắt buộc",
+      "passwordsDoNotMatch": "Mật khẩu không khớp",
+      "firstNameRequired": "Tên là bắt buộc",
+      "firstNameLength": "Tên phải có từ 1 đến 50 ký tự",
+      "firstNamePattern": "Tên chỉ có thể chứa chữ cái, khoảng trắng, dấu gạch ngang và dấu nháy",
+      "lastNameRequired": "Họ là bắt buộc",
+      "lastNameLength": "Họ phải có từ 1 đến 50 ký tự",
+      "lastNamePattern": "Họ chỉ có thể chứa chữ cái, khoảng trắng, dấu gạch ngang và dấu nháy",
+      "phoneNumberPattern": "Vui lòng cung cấp số điện thoại hợp lệ",
+      "loginFailed": "Đăng nhập thất bại",
+      "registrationFailed": "Đăng ký thất bại",
+      "otpRequired": "Mã xác thực là bắt buộc",
+      "otpInvalid": "Vui lòng nhập mã 6 chữ số hợp lệ",
+      "verificationFailed": "Xác thực thất bại"
+    }
+  }
+}

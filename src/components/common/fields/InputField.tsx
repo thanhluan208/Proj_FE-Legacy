@@ -1,29 +1,55 @@
+"use client";
+
 import { Input } from "@/components/ui";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
-import React from "react";
-import { Control, FieldValues, Path, PathValue, useFormContext } from "react-hook-form";
+import { InputProps } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import React, { ReactNode, useCallback, useState } from "react";
+import {
+  Control,
+  FieldValues,
+  Path,
+  PathValue,
+  useFormContext,
+} from "react-hook-form";
 
-interface InputFieldProps<FormValues extends FieldValues, TName extends Path<FormValues>> {
+interface InputFieldProps<
+  FormValues extends FieldValues,
+  TName extends Path<FormValues>,
+> extends InputProps {
   control: Control<FormValues, any>;
   name: TName;
   label: string;
 
   onChangeCustomize?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   afterOnChange?: (value: string) => void;
+
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
-const InputField = <FormValues extends FieldValues, TName extends Path<FormValues>>({
+const InputField = <
+  FormValues extends FieldValues,
+  TName extends Path<FormValues>,
+>({
   control,
   name,
   label,
   onChangeCustomize,
   afterOnChange,
+  leftIcon,
+  rightIcon,
+  type,
+  ...otherInputProps
 }: InputFieldProps<FormValues, TName>) => {
+  const [showPass, setShowPass] = useState(false);
   const form = useFormContext<FormValues>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +65,17 @@ const InputField = <FormValues extends FieldValues, TName extends Path<FormValue
     }
   };
 
+  const renderRightIcon = useCallback(() => {
+    if (rightIcon) return rightIcon;
+
+    if (type === "password") {
+      if (showPass) return <EyeIcon onClick={() => setShowPass(false)} />;
+      return <EyeOffIcon onClick={() => setShowPass(true)} />;
+    }
+
+    return null;
+  }, [rightIcon, showPass, type]);
+
   return (
     <FormField
       control={control}
@@ -46,11 +83,31 @@ const InputField = <FormValues extends FieldValues, TName extends Path<FormValue
       render={({ field }) => {
         const { onChange, ...otherProps } = field;
         return (
-          <FormItem>
+          <FormItem className="flex flex-col gap-1">
             {label && <FormLabel>{label}</FormLabel>}
             <FormControl>
-              <Input onChange={handleChange} {...otherProps} />
+              <div
+                className={cn(
+                  "relative flex items-center gap-1.5 overflow-hidden",
+                  "border border-neutral-90 transition-colors duration-200",
+                  "hover:border-primary focus-within:border-primary",
+                  "disabled:cursor-not-allowed disabled:opacity-50",
+                  "rounded-[10px]",
+                  leftIcon && "pl-2",
+                  (rightIcon || type === "password") && "pr-2"
+                )}
+              >
+                {leftIcon}
+                <Input
+                  onChange={handleChange}
+                  {...otherInputProps}
+                  {...otherProps}
+                  type={showPass ? "text" : type}
+                />
+                {renderRightIcon()}
+              </div>
             </FormControl>
+            <FormMessage />
           </FormItem>
         );
       }}

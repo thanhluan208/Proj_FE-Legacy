@@ -5,19 +5,19 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 const buttonVariants = cva(
-	"inline-flex items-center box-border rounded-[10px] flex flex-row justify-center items-center px-[10px] py-[10px] gap-1 w-[318px] h-[40px] whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+	"inline-flex items-center box-border rounded-[var(--radius)] flex flex-row justify-center items-center px-[10px] py-[10px] gap-1 w-[318px] h-[40px] whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			variant: {
 				default:
-					"bg-[linear-gradient(180deg,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0)_100%),#7D52F4] text-white shadow-[0px_1px_2px_rgba(14,18,27,0.24),0px_0px_0px_1px_#7D52F4] disabled:bg-grey-2 disabled:bg-none disabled:text-white",
-				secondary: "border border-red-600 bg-background text-red-600 ",
-				outline: "border-2 bg-background border-alphii_border",
-				text: "text-primary hover:bg-jungleGreen/10",
+					"bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+				secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+				outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+				text: "text-primary hover:bg-accent hover:text-accent-foreground",
 				ghost: "hover:bg-accent hover:text-accent-foreground",
 				link: "text-primary underline-offset-4 hover:underline",
 				destructive:
-					"border border-destructive bg-transparent text-destructive hover:bg-destructive/10 disabled:border-grey-2 disabled:text-grey-2"
+					"bg-destructive text-destructive-foreground hover:bg-destructive/90"
 			},
 
 			size: {
@@ -50,12 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			<Comp
 				className={cn(buttonVariants({ variant, size, className }))}
 				ref={ref}
-				style={{
-					background:
-						variant === "default"
-							? "linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%), #7D52F4"
-							: ""
-				}}
+				type="button"
 				{...props}
 			/>
 		)

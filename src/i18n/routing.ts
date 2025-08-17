@@ -5,12 +5,12 @@ import { LANGUAGE } from "@/types"
 
 export const routing = defineRouting({
 	// A list of all locales that are supported
-	locales: [LANGUAGE.EN, LANGUAGE.TH],
+	locales: [LANGUAGE.EN, LANGUAGE.VI],
 
 	// Used when no locale matches
 	defaultLocale: LANGUAGE.EN,
 
-	localePrefix: "as-needed"
+	localePrefix: "always"
 })
 
 // Lightweight wrappers around Next.js' navigation APIs
