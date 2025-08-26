@@ -86,6 +86,8 @@ const Login = () => {
     });
   };
 
+  console.log("re-render form wrapper");
+
   return (
     <Form {...loginForm}>
       <div className="sm:w-[500px] sm:m-auto sm:max-w-[500px] backdrop:blur-sm rounded-xl p-3 bg-[rgba(255,255,255,0.1)] shadow-2xl">
