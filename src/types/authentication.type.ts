@@ -41,3 +41,11 @@ export interface RefreshResponse {
   tokenExpires: number;
   refreshExpires: number;
 }
+
+export interface Profile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  createdAt: string;
+  updatedAt: string;
+}

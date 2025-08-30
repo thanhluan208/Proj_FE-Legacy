@@ -12,13 +12,6 @@ export enum STATUS_CODE {
   FAIL = 400,
 }
 
-export interface PagingMeta {
-  current: number;
-  pageSize: number;
-  total: number;
-  pages: number;
-}
-
 export interface RoutesInterface {
   path: string;
   label: string;
@@ -38,15 +31,20 @@ export interface CommonOption {
   icon?: React.ReactNode;
 }
 
-export interface Media {
-  mediaId: string;
-  mediaUrl: string;
-  mediaType: string;
-}
-
 export interface CommonResponse<T> {
   message: string;
   status: number;
   data?: T;
   error?: string;
+}
+
+export interface PaginationResponse<T> {
+  data: T[];
+  page: number;
+  pageSize: number;
+}
+
+export interface PaginationParams {
+  page?: number;
+  pageSize?: number;
 }

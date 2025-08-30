@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 
 import { Providers } from "@/providers";
 
@@ -17,10 +17,11 @@ import { ThemeProvider } from "@/providers/themeProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { twJoin } from "tailwind-merge";
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -43,17 +44,17 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={twJoin(inter.variable)}>
+      <body className={twJoin(poppins.variable)}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="light"
+            defaultTheme="dark"
             enableSystem={false}
             disableTransitionOnChange
           >
             <Providers>
               <SpeedInsights />
-              <main>{children}</main>
+              <main className="font-poppins">{children}</main>
             </Providers>
           </ThemeProvider>
         </NextIntlClientProvider>

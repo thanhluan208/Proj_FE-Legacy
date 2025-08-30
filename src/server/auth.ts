@@ -8,6 +8,7 @@ import { CommonResponse } from "@/types";
 import {
   LoginPayload,
   LoginResponse,
+  Profile,
   RefreshResponse,
   RegisterPayload,
   UserDataLogin,
@@ -100,7 +101,5 @@ export const refreshTokenAction = apiUtils.createServerAction<
   refreshAuth: true,
 });
 
-export const getUserData = apiUtils.createServerAction<
-  { user_id: string },
-  { user_data: any }
->("/user/information/show_user_data", "POST");
+export const getUserData =
+  apiUtils.createServerFetcher<Profile>("/user/profile");

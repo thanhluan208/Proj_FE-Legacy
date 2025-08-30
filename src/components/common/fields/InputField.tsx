@@ -33,6 +33,8 @@ interface InputFieldProps<
 
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+
+  inputContainerClassName?: string;
 }
 
 const InputField = <
@@ -47,6 +49,7 @@ const InputField = <
   leftIcon,
   rightIcon,
   type,
+  inputContainerClassName,
   ...otherInputProps
 }: InputFieldProps<FormValues, TName>) => {
   const [showPass, setShowPass] = useState(false);
@@ -94,7 +97,8 @@ const InputField = <
                   "disabled:cursor-not-allowed disabled:opacity-50",
                   "rounded-[10px]",
                   leftIcon && "pl-2",
-                  (rightIcon || type === "password") && "pr-2"
+                  (rightIcon || type === "password") && "pr-2",
+                  inputContainerClassName
                 )}
               >
                 {leftIcon}

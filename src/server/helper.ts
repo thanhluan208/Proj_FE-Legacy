@@ -38,7 +38,10 @@ class ApiInstance {
         isRefresh ? REFRESH_TOKEN : ACCESS_TOKEN
       )?.value;
 
-      console.log(`[API DEBUG] Using ${isRefresh ? "refresh" : "access"} token:`, token);
+      console.log(
+        `[API DEBUG] Using ${isRefresh ? "refresh" : "access"} token:`,
+        token
+      );
 
       if (token) {
         return { Authorization: `Bearer ${token}` };
@@ -104,8 +107,6 @@ class ApiInstance {
         const data = isJsonResponse
           ? await response.json()
           : await response.text();
-
-          console.log("response", response.ok)
 
         if (!response.ok) {
           // Handle specific HTTP errors
@@ -254,8 +255,6 @@ export async function serverFetcher<T>(
   endpoint: string,
   options?: RequestOptions
 ): Promise<ApiResponse<T>> {
-  "use server";
-
   return api.get<T>(endpoint, options);
 }
 
@@ -279,7 +278,6 @@ export const apiUtils = {
    */
   createServerFetcher: <T>(endpoint: string) => {
     return async (options?: RequestOptions): Promise<ApiResponse<T>> => {
-      "use server";
       return serverFetcher<T>(endpoint, options);
     };
   },

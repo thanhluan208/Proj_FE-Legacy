@@ -1,164 +1,195 @@
-import { getCookie, removeCookie, setCookie } from "@/app/actions"
-import { redirect } from "@/i18n/routing"
-import {
-	ACCESS_TOKEN,
-	BASE_URL,
-	NEXT_LOCALE,
-	REFRESH_TOKEN,
-	Routes
-} from "@/lib/constant"
-import { LANGUAGE, STATUS_CODE } from "@/types"
 import axios, {
-	AxiosError,
-	AxiosInstance,
-	AxiosRequestConfig,
-	AxiosResponse
-} from "axios"
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from "axios";
 
-export const TOKEN_KEY = "token"
-export const REFRESH_TOKEN_KEY = "refreshToken"
-export const USER_KEY = "user"
-
-class httpServices {
-	axios: AxiosInstance
-	isRefreshing = false
-	requestQueue: ((token: string) => void)[] = []
-
-	constructor() {
-		this.axios = axios
-		this.axios.defaults.withCredentials = true
-		this.axios.defaults.baseURL = BASE_URL
-
-		this.axios.defaults.headers["ngrok-skip-browser-warning"] = true
-
-		//! Interceptor request
-		this.axios.interceptors.request.use(
-			async function (config) {
-				config.headers["x-timezone"] =
-					Intl.DateTimeFormat().resolvedOptions().timeZone
-
-				return config
-			},
-			function (error) {
-				return Promise.reject(error)
-			}
-		)
-
-		//! Interceptor response
-		this.axios.interceptors.response.use(
-			function (response: AxiosResponse) {
-				// Pass through successful responses
-				return response
-			},
-			async (error: AxiosError) => {
-				const originalRequest = error.config // Access the original request
-				const access_token = await getCookie(ACCESS_TOKEN)
-				const refreshToken = await getCookie(REFRESH_TOKEN)
-				const locale = await getCookie(NEXT_LOCALE)
-
-				if (
-					error.response?.status === STATUS_CODE.UNAUTHORIZED &&
-					refreshToken &&
-					access_token
-				) {
-					if (!this.isRefreshing) {
-						this.isRefreshing = true
-
-						// try {
-						// 	// Refresh the token
-						// 	this.attachTokenToHeader(refreshToken)
-						// 	const response = await AuthServices.refreshToken()
-						// 	const newAccessToken = response?.data?.access_token
-
-						// 	// Update cookies with the new token
-						// 	if (newAccessToken) {
-						// 		setCookie(ACCESS_TOKEN, newAccessToken)
-						// 	}
-
-						// 	this.attachTokenToHeader(newAccessToken)
-
-						// 	// Resolve all queued requests with the new token
-						// 	this.requestQueue.forEach((cb) => {
-						// 		cb(newAccessToken)
-						// 	})
-						// 	this.requestQueue = [] // Clear the queue
-
-						// 	this.isRefreshing = false
-						// 	if (originalRequest?.headers) {
-						// 		originalRequest.headers["Authorization"] =
-						// 			`Bearer ${newAccessToken}`
-						// 		return this.axios.request(originalRequest)
-						// 	}
-						// } catch (refreshError) {
-						// 	this.isRefreshing = false
-						// 	removeCookie(ACCESS_TOKEN)
-						// 	removeCookie(REFRESH_TOKEN)
-						// 	// Redirect to login or handle appropriately
-						// 	// window.location.reload()
-						// 	redirect({
-						// 		href: Routes.LOGIN,
-						// 		locale: locale || LANGUAGE.EN
-						// 	})
-						// 	return Promise.reject(refreshError)
-						// }
-					}
-
-					// Queue the current request until the token refresh is complete
-					return new Promise((resolve) => {
-						this.requestQueue.push((newToken: string) => {
-							if (originalRequest?.headers) {
-								originalRequest.headers["Authorization"] = `Bearer ${newToken}`
-							}
-							originalRequest && resolve(this.axios(originalRequest))
-						})
-					})
-				}
-
-				return Promise.reject(error) // Reject all other errors
-			}
-		)
-	}
-
-	attachTokenToHeader(token: string) {
-		this.axios.defaults.headers.Authorization = `Bearer ${token}`
-	}
-
-	setupInterceptors() {
-		this.axios.interceptors.response.use(
-			(response) => {
-				return response
-			},
-			(error) => {
-				const { status } = error?.response || {}
-				if (status === 200) {
-					window.localStorage.clear()
-					window.location.reload()
-				}
-
-				return Promise.reject(error)
-			}
-		)
-	}
-
-	get(url: string, config?: AxiosRequestConfig) {
-		return this.axios.get(url, config)
-	}
-
-	post(url: string, data: any, config?: AxiosRequestConfig) {
-		return this.axios.post(url, data, config)
-	}
-
-	delete(url: string, config?: AxiosRequestConfig) {
-		return this.axios.delete(url, config)
-	}
-
-	put(url: string, data: any, config?: AxiosRequestConfig) {
-		return this.axios.put(url, data, config)
-	}
-
-	patch(url: string, data: any, config?: AxiosRequestConfig) {
-		return this.axios.patch(url, data, config)
-	}
+// Type definitions
+interface ErrorResponse {
+  error: string;
+  details?: string;
+  requestId?: string;
+  timestamp?: string;
 }
 
-export const api = new httpServices()
+interface ProxyErrorResponse extends AxiosError {
+  response?: AxiosResponse<ErrorResponse>;
+}
+
+class HttpServices {
+  private axios: AxiosInstance;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: "/api/doorly", // Route all requests through Next.js proxy
+    });
+
+    this.setupDefaultHeaders();
+    this.setupRequestInterceptor();
+    this.setupResponseInterceptor();
+  }
+
+  /**
+   * Setup default headers that will be added to all requests
+   */
+  private setupDefaultHeaders(): void {
+    this.axios.defaults.headers["ngrok-skip-browser-warning"] = "true";
+    this.axios.defaults.headers["X-Client-Type"] = "web";
+    this.axios.defaults.headers["X-Client-Version"] =
+      process.env.NEXT_PUBLIC_APP_VERSION || "1.0.0";
+  }
+
+  /**
+   * Setup request interceptor for client-side headers
+   */
+  private setupRequestInterceptor(): void {
+    this.axios.interceptors.request.use(
+      (config) => {
+        // Add timezone information for all requests
+        config.headers["X-Timezone"] =
+          Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        // Add timestamp for request tracking
+        config.headers["X-Client-Timestamp"] = new Date().toISOString();
+
+        console.log("config", config);
+
+        return config;
+      },
+      (error: AxiosError) => {
+        console.error("Request interceptor error:", error);
+        return Promise.reject(error);
+      }
+    );
+  }
+
+  /**
+   * Setup response interceptor for handling errors and responses
+   */
+  private setupResponseInterceptor(): void {
+    this.axios.interceptors.response.use(
+      (response: AxiosResponse) => {
+        // Log successful responses in development
+        if (process.env.NODE_ENV === "development") {
+          console.log(
+            `✅ ${response.config.method?.toUpperCase()} ${response.config.url} - ${response.status}`
+          );
+        }
+        return response;
+      },
+      (error: ProxyErrorResponse) => {
+        const { response, config } = error;
+
+        // Log errors
+        console.error(
+          `❌ ${config?.method?.toUpperCase()} ${config?.url} - ${response?.status || "Network Error"}`,
+          {
+            error: response?.data || error.message,
+            requestId: response?.data?.requestId,
+          }
+        );
+
+        // Handle specific error cases
+        if (response?.status === 401) {
+          this.handleUnauthorizedError();
+        } else if (response?.status === 503) {
+          this.handleServiceUnavailableError(response.data);
+        } else if (
+          response?.status === 400 &&
+          response.data?.error === "Invalid proxy path"
+        ) {
+          console.error("Invalid API path used:", config?.url);
+        }
+
+        return Promise.reject(error);
+      }
+    );
+  }
+
+  /**
+   * Handle 401 Unauthorized errors
+   */
+  private handleUnauthorizedError(): void {
+    console.warn("Authentication failed - redirecting to login");
+
+    // Redirect to login page
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+  }
+
+  /**
+   * Handle 503 Service Unavailable errors
+   */
+  private handleServiceUnavailableError(errorData: ErrorResponse): void {
+    console.error("Backend service unavailable:", errorData);
+
+    // You could show a toast notification or error banner here
+    // Example: toast.error("Service temporarily unavailable. Please try again later.")
+  }
+
+  // HTTP method wrappers with improved typing
+  async get<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
+    return this.axios.get<T>(url, config);
+  }
+
+  async post<T = any, D = any>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
+    return this.axios.post<T>(url, data, config);
+  }
+
+  async delete<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
+    return this.axios.delete<T>(url, config);
+  }
+
+  async put<T = any, D = any>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
+    return this.axios.put<T>(url, data, config);
+  }
+
+  async patch<T = any, D = any>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
+    return this.axios.patch<T>(url, data, config);
+  }
+
+  /**
+   * Get the axios instance for advanced usage
+   */
+  getAxiosInstance(): AxiosInstance {
+    return this.axios;
+  }
+
+  /**
+   * Create a request with custom configuration
+   */
+  async request<T = any>(
+    config: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
+    return this.axios.request<T>(config);
+  }
+}
+
+// Export singleton instance
+export const api = new HttpServices();
+
+// Export types for use in other files
+export type { ErrorResponse, ProxyErrorResponse };
+
+// Export the class for testing or advanced usage
+export { HttpServices };

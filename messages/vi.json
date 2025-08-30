@@ -97,5 +97,28 @@
       "otpInvalid": "Vui lòng nhập mã 6 chữ số hợp lệ",
       "verificationFailed": "Xác thực thất bại"
     }
+  },
+  "property": {
+    "validation": {
+      "nameRequired": "Tên nhà là bắt buộc",
+      "nameMaxLength": "Tên nhà không được vượt quá 64 ký tự",
+      "descriptionMaxLength": "Mô tả không được vượt quá 512 ký tự",
+      "addHouseFailed": "Thêm nhà thất bại. Vui lòng thử lại."
+    },
+    "addHouse": {
+      "title": "Thêm Nhà Mới",
+      "subtitle": "Tạo danh sách bất động sản mới",
+      "name": "Tên Nhà",
+      "namePlaceholder": "Nhập tên nhà (ví dụ: Villa Hoàng Hôn, Căn Hộ Trung Tâm)",
+      "description": "Mô Tả",
+      "descriptionPlaceholder": "Mô tả các tính năng, vị trí, tiện nghi của ngôi nhà, v.v. (tùy chọn)",
+      "characters": "ký tự",
+      "cancel": "Hủy",
+      "addButton": "Thêm Nhà"
+    },
+    "messages": {
+      "houseAddedSuccess": "Nhà đã được thêm thành công!",
+      "houseAddedError": "Đã xảy ra lỗi khi thêm nhà. Vui lòng thử lại."
+    }
   }
 }

@@ -10,6 +10,7 @@ import { twMerge } from "tailwind-merge";
 
 import { STATUS_CODE } from "./../types/index";
 import { TIME_IN_SECONDS } from "./constant";
+import { isNil } from "lodash";
 
 dayjs.extend(duration);
 
@@ -125,4 +126,16 @@ export function decodeJwtPayload(
     console.error("Error decoding JWT token:", error);
     return null;
   }
+}
+
+
+export const queryStringify = (obj?: { [key: string]: any }) => {
+  const str = [];
+  for (const p in obj)
+    if (obj.hasOwnProperty(p) && !isNil(obj[p])) {
+      str.push(
+        encodeURIComponent(p) + "=" + encodeURIComponent(String(obj[p]))
+      );
+    }
+  return str.join("&");
 }

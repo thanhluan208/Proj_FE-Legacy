@@ -5,14 +5,14 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 const buttonVariants = cva(
-	"inline-flex items-center box-border rounded-[var(--radius)] flex flex-row justify-center items-center px-[10px] py-[10px] gap-1 w-[318px] h-[40px] whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+	"inline-flex items-center cursor-pointer box-border rounded-[var(--radius)] flex flex-row justify-center items-center px-[10px] py-[10px] gap-1 w-[318px] h-[40px] whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			variant: {
 				default:
-					"bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+					"bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm text-white",
 				secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-				outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+				outline: "border border-primary bg-transparent hover:bg-neutral-90/80",
 				text: "text-primary hover:bg-accent hover:text-accent-foreground",
 				ghost: "hover:bg-accent hover:text-accent-foreground",
 				link: "text-primary underline-offset-4 hover:underline",

@@ -97,5 +97,28 @@
       "otpInvalid": "Please enter a valid 6-digit code",
       "verificationFailed": "Verification failed"
     }
+  },
+  "property": {
+    "validation": {
+      "nameRequired": "House name is required",
+      "nameMaxLength": "House name must not exceed 64 characters",
+      "descriptionMaxLength": "Description must not exceed 512 characters",
+      "addHouseFailed": "Failed to add house. Please try again."
+    },
+    "addHouse": {
+      "title": "Add New House",
+      "subtitle": "Create a new property listing",
+      "name": "House Name",
+      "namePlaceholder": "Enter house name (e.g., Sunset Villa, Downtown Apartment)",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the house features, location, amenities, etc. (optional)",
+      "characters": "characters",
+      "cancel": "Cancel",
+      "addButton": "Add House"
+    },
+    "messages": {
+      "houseAddedSuccess": "House has been added successfully!",
+      "houseAddedError": "An error occurred while adding the house. Please try again."
+    }
   }
 }

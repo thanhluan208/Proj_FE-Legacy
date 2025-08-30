@@ -1,4 +1,7 @@
 @import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
@@ -67,17 +70,18 @@
   --primary-90: #b33021;
   --primary-100: #ff6f61;
 
-  /* Neutral (Soft Black) scale */
-  --neutral-10: #f5f5f5;
-  --neutral-20: #e5e5e5;
-  --neutral-30: #d4d4d4;
-  --neutral-40: #a3a3a3;
-  --neutral-50: #737373;
-  --neutral-60: #525252;
-  --neutral-70: #404040;
-  --neutral-80: #262626;
-  --neutral-90: #1e1e1e;
-  --neutral-100: #141414;
+  /* Neutral (Gray) scale - Light theme */
+  --neutral-0: #000000;
+  --neutral-10: #222222;
+  --neutral-20: #333333;
+  --neutral-30: #454545;
+  --neutral-40: #707070;
+  --neutral-50: #999999;
+  --neutral-60: #cecece;
+  --neutral-70: #dcdcdc;
+  --neutral-80: #eeeeee;
+  --neutral-90: #f5f5f5;
+  --neutral-100: #fdfdfd;
 
   --neutral-foreground: #ffffff;
 }
@@ -142,22 +146,25 @@
   --primary-90: #fff5f4;
   --primary-100: #fcfcfd;
 
-  /* Neutral scale - inverted for dark mode */
-  --neutral-10: #141414;
-  --neutral-20: #1e1e1e;
-  --neutral-30: #262626;
-  --neutral-40: #404040;
-  --neutral-50: #525252;
-  --neutral-60: #737373;
-  --neutral-70: #a3a3a3;
-  --neutral-80: #d4d4d4;
-  --neutral-90: #e5e5e5;
-  --neutral-100: #f5f5f5;
+  /* Neutral (Gray) scale - Dark theme (inverted) */
+  --neutral-0: #ffffff;
+  --neutral-10: #f8f8f8;
+  --neutral-20: #dddddd;
+  --neutral-30: #d5d5d5;
+  --neutral-40: #9d9d9d;
+  --neutral-50: #757575;
+  --neutral-60: #4d4d4d;
+  --neutral-70: #3d3d3d;
+  --neutral-80: #27282c;
+  --neutral-90: #1d1d1f;
+  --neutral-100: #121317;
 
   --neutral-foreground: #000000;
 }
 
 @theme inline {
+  --font-poppins: "Poppins", sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -200,6 +207,7 @@
   --color-secondary-80: var(--secondary-80);
   --color-secondary-90: var(--secondary-90);
   --color-secondary-100: var(--secondary-100);
+  --color-neutral-0: var(--neutral-0);
   --color-neutral-10: var(--neutral-10);
   --color-neutral-20: var(--neutral-20);
   --color-neutral-30: var(--neutral-30);
