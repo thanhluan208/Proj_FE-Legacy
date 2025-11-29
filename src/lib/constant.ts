@@ -23,7 +23,7 @@ export const Routes = {
   BILLS: "/bills",
   HISTORY: "/history",
 
-  HOUSE: (houseId = "houseId") => `/house/${houseId}`,
+  house: (houseId = "houseId") => `/house/${houseId}`,
 
   GOOGLE_LOGIN: "http://localhost:8000/auth/google",
   GITHUB_LOGIN: "http://localhost:8000/auth/github",
@@ -33,6 +33,7 @@ export const Routes = {
 export const QueryKeys = {
 
   HOUSE_LIST: "HOUSE_LIST",
+  ROOM_LIST: "ROOM_LIST",
  
 };
 

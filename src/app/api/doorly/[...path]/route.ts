@@ -65,6 +65,7 @@ async function handleProxyRequest(
 	const backendPath = Array.isArray(path) ? path.join("/") : path
 	const backendUrl = `${BACKEND_API_URL}/${backendPath}${url.search}`
 
+	console.log('backendUrl',backendUrl)
 	// Validate backend URL
 	if (!isValidUrl(backendUrl)) {
 		return NextResponse.json(

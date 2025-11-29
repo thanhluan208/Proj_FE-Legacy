@@ -11,6 +11,7 @@ import { twMerge } from "tailwind-merge";
 import { STATUS_CODE } from "./../types/index";
 import { TIME_IN_SECONDS } from "./constant";
 import { isNil } from "lodash";
+import BigNumber from "bignumber.js";
 
 dayjs.extend(duration);
 
@@ -128,7 +129,6 @@ export function decodeJwtPayload(
   }
 }
 
-
 export const queryStringify = (obj?: { [key: string]: any }) => {
   const str = [];
   for (const p in obj)
@@ -138,4 +138,104 @@ export const queryStringify = (obj?: { [key: string]: any }) => {
       );
     }
   return str.join("&");
-}
+};
+
+export const trimTrailingZeros = (str: string) => {
+  return str.replace(/(\.\d*?[1-9])0+$/, "$1").replace(/\.0+$/, "");
+};
+
+export const numberToVietnameseText = (num: string | number | BigNumber): string => {
+  const ones = [
+    '',
+    'một',
+    'hai',
+    'ba',
+    'bốn',
+    'năm',
+    'sáu',
+    'bảy',
+    'tám',
+    'chín',
+  ];
+  const tens = [
+    '',
+    '',
+    'hai mươi',
+    'ba mươi',
+    'bốn mươi',
+    'năm mươi',
+    'sáu mươi',
+    'bảy mươi',
+    'tám mươi',
+    'chín mươi',
+  ];
+  const baseScales = ['', 'nghìn', 'triệu', 'tỷ']; // cycle of 3
+
+  const bn = new BigNumber(num);
+
+  if (bn.isZero()) return 'không đồng';
+
+  const convertHundreds = (n: number): string => {
+    let result = '';
+    const hundred = Math.floor(n / 100);
+    const remainder = n % 100;
+    const ten = Math.floor(remainder / 10);
+    const one = remainder % 10;
+
+    if (hundred > 0) {
+      result += ones[hundred] + ' trăm';
+      if (remainder > 0) result += ' ';
+    }
+
+    if (ten >= 2) {
+      result += tens[ten];
+      if (one > 0) {
+        result += ' ' + (one === 1 ? 'mốt' : one === 5 ? 'lăm' : ones[one]);
+      }
+    } else if (ten === 1) {
+      result += 'mười';
+      if (one > 0) {
+        result += ' ' + (one === 5 ? 'lăm' : ones[one]);
+      }
+    } else if (one > 0 && hundred > 0) {
+      result += 'lẻ ' + (one === 5 ? 'năm' : ones[one]);
+    } else if (one > 0) {
+      result += ones[one];
+    }
+
+    return result;
+  };
+
+  const getScale = (index: number): string => {
+    if (index < baseScales.length) return baseScales[index];
+    const base = Math.floor(index / 3);
+    const remainder = index % 3;
+    let suffix = '';
+    for (let i = 0; i < base; i++) suffix += 'tỷ ';
+    return (baseScales[remainder] + ' ' + suffix).trim();
+  };
+
+  const convertBigNumber = (n: BigNumber): string => {
+    let result = '';
+    let scaleIndex = 0;
+    let current = n;
+
+    while (!current.isZero()) {
+      const group = current.mod(1000).toNumber(); // always <1000 → safe as Number
+      if (group > 0) {
+        const groupText = convertHundreds(group);
+        const scaleText = getScale(scaleIndex);
+        result =
+          groupText +
+          (scaleText ? ' ' + scaleText : '') +
+          (result ? ' ' + result : '');
+      }
+      current = current.dividedToIntegerBy(1000);
+      scaleIndex++;
+    }
+
+    return result;
+  };
+
+  return convertBigNumber(bn) + ' đồng';
+};

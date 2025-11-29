@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 import { Home, Pencil, Plus } from "lucide-react";
 import React from "react";
 import AddHouseButton from "./AddHouseButton";
+import AddRoomButton from "./AddRoomButton";
 
 const SidebarHouseList = () => {
-  const { data, isLoading } = useGetHouse();
+  const { data, isFetching, } = useGetHouse();
+
 
   return (
     <div className="rounded-xl  items-center flex-col flex bg-neutral-100 overflow-hidden hover:shadow-sm transition-shadow">
@@ -19,10 +21,11 @@ const SidebarHouseList = () => {
         <AddHouseButton />
       </div>
 
-      {(!data || isLoading) &&
+      {(isFetching) &&
         [1, 2, 3].map((_, index) => {
           return (
             <div
+              key={index}
               className={cn(
                 "flex items-center relative justify-between group gap-2.5 w-full text-sm p-1 pl-8 hover:bg-neutral-90/60 hover:text-primary-60",
                 index !== 0 && "border-t border-neutral-90/20"
@@ -34,11 +37,11 @@ const SidebarHouseList = () => {
         })}
 
       {data?.data &&
-        !isLoading &&
+        !isFetching &&
         data?.data?.map((house, index) => {
           return (
-            <Link
-              href={`${Routes.HOUSE(house.id)}`}
+            <div
+              // href={`${Routes.house(house.id)}`}
               key={house.id}
               className={cn(
                 "flex items-center relative justify-between group gap-2.5 w-full text-sm py-3.5 px-3 pl-8 hover:bg-neutral-90/60 hover:text-primary-60",
@@ -50,8 +53,8 @@ const SidebarHouseList = () => {
                 <p>{house.name}</p>
               </div>
 
-              <Pencil className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary-60" />
-            </Link>
+              <AddRoomButton houseId={house.id} />
+            </div>
           );
         })}
     </div>

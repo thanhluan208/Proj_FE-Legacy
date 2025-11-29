@@ -72,13 +72,16 @@ const AddHouseForm = ({ setOpen }: AddHouseFormProps) => {
     !isPending;
 
   // Handle form submission with error handling and loading state
-  const onSubmit = (data: z.infer<typeof addHouseSchema>) => {
+  const onSubmit = async (data: z.infer<typeof addHouseSchema>) => {
     if (isPending) return;
-    createHouse.mutate({
+    const response = await createHouse.mutateAsync({
       name: data.name.trim(),
       description: data.description?.trim() || undefined,
     });
-    setOpen(false);
+
+    if(response.id) {
+      setOpen(false)
+    }
   };
 
   // Handle form cancellation

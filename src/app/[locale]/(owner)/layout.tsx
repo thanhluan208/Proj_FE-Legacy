@@ -57,7 +57,7 @@ const OwnerLayout = async ({
   ];
 
   return (
-    <div className="bg-neutral-90 p-3 pt-5 flex h-screen w-screen">
+    <div className="bg-neutral-90 p-3 pt-5 flex min-h-screen w-screen">
       <div className="max-h-[cacl(100vh-32px)] w-[308px] no-scrollbar overflow-y-auto">
         <div className="flex flex-col gap-5 ">
           <div className="rounded-xl p-3 items-center flex gap-2 justify-between bg-neutral-100">
@@ -114,7 +114,7 @@ const OwnerLayout = async ({
             {[1, 2, 3, 4].map((_, index) => {
               return (
                 <Link
-                  href={`${Routes.HOUSE(String(index))}`}
+                  href={`${Routes.house(String(index))}`}
                   key={index}
                   className={cn(
                     "flex items-center relative justify-between group gap-2.5 w-full text-sm py-3.5 px-3 pl-8 hover:bg-neutral-90/60 hover:text-primary-60",
