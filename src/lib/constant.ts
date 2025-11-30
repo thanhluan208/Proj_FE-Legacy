@@ -24,6 +24,7 @@ export const Routes = {
   HISTORY: "/history",
 
   house: (houseId = "houseId") => `/house/${houseId}`,
+  room: (roomId = "roomId") => `/room/${roomId}`,
 
   GOOGLE_LOGIN: "http://localhost:8000/auth/google",
   GITHUB_LOGIN: "http://localhost:8000/auth/github",
@@ -31,10 +32,11 @@ export const Routes = {
 };
 
 export const QueryKeys = {
-
   HOUSE_LIST: "HOUSE_LIST",
   ROOM_LIST: "ROOM_LIST",
- 
+  ROOM_DETAIL: "ROOM_DETAIL",
+  BILLING_LIST: "BILLING_LIST",
+  TENANT_LIST: "TENANT_LIST",
 };
 
 export const TIME_IN_SECONDS = {

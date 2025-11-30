@@ -13,18 +13,21 @@ import {
   Calendar,
 } from "lucide-react";
 import { format } from "date-fns";
+import { useRouter } from "@/i18n/routing";
+import { Routes } from "@/lib/constant";
 
 interface RoomCardProps {
   room: Room;
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
-  console.log("room", room);
-  const formatCurrency = (value: number) => {
+  const router = useRouter();
+
+  const formatCurrency = (value: number | string) => {
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
-    }).format(value);
+    }).format(Number(value));
   };
 
   const getElectricityFee = () => {
@@ -69,7 +72,10 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
   const statusConfig = getStatusConfig();
 
   return (
-    <div className="rounded-xl p-5 hover:shadow-lg transition-all shadow-sm duration-300 bg-accent/30 hover:bg-accent/50 group relative overflow-hidden">
+    <div
+      onClick={() => router.push(`${Routes.room(room.id)}`)}
+      className="rounded-xl p-5 cursor-pointer hover:shadow-lg transition-all shadow-sm duration-300 bg-accent/30 hover:bg-accent/50 group relative overflow-hidden"
+    >
       {/* Action Buttons (Show on Hover) */}
       <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
         <button

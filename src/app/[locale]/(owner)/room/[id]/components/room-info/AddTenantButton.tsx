@@ -1,0 +1,47 @@
+import AddTenantForm from "@/app/[locale]/(owner)/components/tenants/AddTenantForm";
+import { Button } from "@/components/ui";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Plus, UserPlus } from "lucide-react";
+import React, { FC, Fragment } from "react";
+
+interface AddTenantButtonProps {
+  houseId: string;
+  roomId: string;
+}
+
+const AddTenantButton: FC<AddTenantButtonProps> = ({ houseId, roomId }) => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Fragment>
+      <Button onClick={() => setOpen(true)} size="sm" className="gap-2 w-fit">
+        <UserPlus className="w-4 h-4" />
+        Add Tenant
+      </Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-[700px] max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Add new tenant</DialogTitle>
+            <DialogDescription>Add a new tenant to this room</DialogDescription>
+          </DialogHeader>
+
+          {open && (
+            <AddTenantForm
+              setIsDialogOpen={setOpen}
+              houseId={houseId}
+              roomId={roomId}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+    </Fragment>
+  );
+};
+
+export default AddTenantButton;

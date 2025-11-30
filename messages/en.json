@@ -184,5 +184,45 @@
     "messages": {
       "roomAddedSuccess": "Room has been added successfully!"
     }
+  },
+  "tenant": {
+    "validation": {
+      "nameRequired": "Tenant name is required"
+    },
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter tenant's full name",
+      "phoneNumber": "Phone Number",
+      "phoneNumberPlaceholder": "Enter phone number",
+      "dob": "Date of Birth",
+      "sex": "Gender",
+      "sexPlaceholder": "Select gender",
+      "address": "Address",
+      "addressPlaceholder": "Enter full address",
+      "citizenId": "Citizen ID",
+      "citizenIdPlaceholder": "Enter citizen ID number",
+      "nationality": "Nationality",
+      "nationalityPlaceholder": "Enter nationality",
+      "home": "Hometown",
+      "homePlaceholder": "Enter hometown",
+      "issueDate": "ID Issue Date",
+      "issueLoc": "ID Issue Location",
+      "issueLocPlaceholder": "Enter ID issue location",
+      "tenantJob": "Occupation",
+      "tenantJobPlaceholder": "Enter occupation",
+      "tenantWorkAt": "Workplace",
+      "tenantWorkAtPlaceholder": "Enter workplace",
+      "cancel": "Cancel",
+      "submit": "Add Tenant"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "messages": {
+      "createSuccess": "Tenant has been added successfully!",
+      "createError": "Failed to add tenant. Please try again."
+    }
   }
 }

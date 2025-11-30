@@ -12,3 +12,7 @@ export const getRooms = async (
 export const createRoom = async (data: CreateRoomDto): Promise<Room> => {
   return api.post("/rooms/create", data).then((res) => res.data);
 };
+
+export const getRoomDetail = async (id: string): Promise<Room> => {
+  return api.get(`/rooms/${id}`).then((res) => res.data);
+};

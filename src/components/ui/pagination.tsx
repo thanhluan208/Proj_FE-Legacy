@@ -1,99 +1,76 @@
-"use client"
-
-import React, { useMemo } from "react"
-import { useSearchParams } from "next/navigation"
-
-import { usePathname, useRouter } from "@/i18n/routing"
-import { cn, createQueryString, generatePageNumbers } from "@/lib/utils"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-
-import { Button } from "./button"
+import React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PaginationProps {
-	currentPage: number
-	totalPage: number
-	onPageChange?: (page: number) => void
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
 }
 
-const Pagination = ({
-	currentPage,
-	totalPage,
-	onPageChange
-}: PaginationProps) => {
-	const router = useRouter()
-	const pathname = usePathname()
-	const searchParams = useSearchParams()
-	const listPagination = useMemo(() => {
-		return generatePageNumbers(currentPage, totalPage) || []
-	}, [currentPage, totalPage])
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}) => {
+  if (totalPages <= 1) return null;
 
-	const isFirst = currentPage === 1
-	const isLast = currentPage === totalPage
+  return (
+    <div className="flex items-center justify-center gap-2 mt-6">
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="p-2 rounded-lg bg-accent/50 dark:bg-accent/30 text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+        aria-label="Previous Page"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
 
-	const handleChangePage = (page: number) => {
-		onPageChange && onPageChange(page)
-		const queries = [{ name: "page", value: String(page) }]
-		searchParams.forEach((value, key) => {
-			if (value && key !== "page") {
-				queries.push({
-					name: key,
-					value
-				})
-			}
-		})
+      <div className="flex items-center gap-1">
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+          // Show first page, last page, current page, and pages around current
+          const showPage =
+            page === 1 ||
+            page === totalPages ||
+            (page >= currentPage - 1 && page <= currentPage + 1);
 
-		const queryString = createQueryString(searchParams, queries)
-		router.replace(`${pathname}?${queryString}`)
-	}
+          if (!showPage) {
+            // Show ellipsis
+            if (page === currentPage - 2 || page === currentPage + 2) {
+              return (
+                <span key={page} className="px-2 text-muted-foreground">
+                  ...
+                </span>
+              );
+            }
+            return null;
+          }
 
-	return (
-		<div className="w-full flex justify-end gap-6 items-center mt-5">
-			<Button
-				disabled={isFirst}
-				variant="ghost"
-				className="text-primary h-9 w-10 hover:text-primary  rounded-[6px] border border-grey-3"
-				onClick={() => {
-					if (isFirst) return
-					handleChangePage(currentPage - 1)
-				}}
-			>
-				<ArrowLeft />
-			</Button>
-			<div className="flex gap-2">
-				{listPagination.map((elm) => {
-					const isCurrent = currentPage === +elm
-					return (
-						<Button
-							onClick={() => {
-								if (isCurrent) return
-								handleChangePage(+elm)
-							}}
-							key={elm}
-							variant={"ghost"}
-							className={cn(
-								"h-9 w-9 border border-grey-3 rounded-[6px]",
-								isCurrent &&
-									"text-white bg-primary hover:bg-primary hover:text-white"
-							)}
-						>
-							{elm}
-						</Button>
-					)
-				})}
-			</div>
-			<Button
-				disabled={isLast}
-				onClick={() => {
-					if (isLast) return
-					handleChangePage(currentPage + 1)
-				}}
-				variant="ghost"
-				className="text-primary h-9 w-10 hover:text-primary  rounded-[6px] border border-grey-3"
-			>
-				<ArrowRight />
-			</Button>
-		</div>
-	)
-}
+          return (
+            <button
+              key={page}
+              onClick={() => onPageChange(page)}
+              className={`min-w-[2.5rem] px-3 py-2 rounded-lg font-medium transition-all ${
+                currentPage === page
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-accent/50 dark:bg-accent/30 text-foreground hover:bg-accent"
+              }`}
+            >
+              {page}
+            </button>
+          );
+        })}
+      </div>
 
-export default Pagination
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="p-2 rounded-lg bg-accent/50 dark:bg-accent/30 text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+        aria-label="Next Page"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+    </div>
+  );
+};
+
+export default Pagination;

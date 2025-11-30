@@ -184,5 +184,45 @@
     "messages": {
       "roomAddedSuccess": "Phòng đã được thêm thành công!"
     }
+  },
+  "tenant": {
+    "validation": {
+      "nameRequired": "Tên người thuê là bắt buộc"
+    },
+    "form": {
+      "name": "Họ và Tên",
+      "namePlaceholder": "Nhập họ và tên người thuê",
+      "phoneNumber": "Số Điện Thoại",
+      "phoneNumberPlaceholder": "Nhập số điện thoại",
+      "dob": "Ngày Sinh",
+      "sex": "Giới Tính",
+      "sexPlaceholder": "Chọn giới tính",
+      "address": "Địa Chỉ",
+      "addressPlaceholder": "Nhập địa chỉ đầy đủ",
+      "citizenId": "CMND/CCCD",
+      "citizenIdPlaceholder": "Nhập số CMND/CCCD",
+      "nationality": "Quốc Tịch",
+      "nationalityPlaceholder": "Nhập quốc tịch",
+      "home": "Quê Quán",
+      "homePlaceholder": "Nhập quê quán",
+      "issueDate": "Ngày Cấp CMND/CCCD",
+      "issueLoc": "Nơi Cấp CMND/CCCD",
+      "issueLocPlaceholder": "Nhập nơi cấp CMND/CCCD",
+      "tenantJob": "Nghề Nghiệp",
+      "tenantJobPlaceholder": "Nhập nghề nghiệp",
+      "tenantWorkAt": "Nơi Làm Việc",
+      "tenantWorkAtPlaceholder": "Nhập nơi làm việc",
+      "cancel": "Hủy",
+      "submit": "Thêm Người Thuê"
+    },
+    "gender": {
+      "male": "Nam",
+      "female": "Nữ",
+      "other": "Khác"
+    },
+    "messages": {
+      "createSuccess": "Người thuê đã được thêm thành công!",
+      "createError": "Thêm người thuê thất bại. Vui lòng thử lại."
+    }
   }
 }
