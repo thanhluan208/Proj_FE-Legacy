@@ -45,7 +45,7 @@ const FinancialSummary: React.FC<FinancialSummaryProps> = ({ data }) => {
   };
 
   return (
-    <div className="bg-card text-card-foreground rounded-2xl shadow-md p-8">
+    <div className="bg-card text-card-foreground rounded-2xl shadow-md p-4">
       <h2 className="text-xl font-bold mb-6">Financial Summary (Last 12 Months)</h2>
       
       <div className="h-[300px] w-full">

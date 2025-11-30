@@ -2,7 +2,7 @@
 
 import { Skeleton } from "@/components/ui";
 import { useGetHouse } from "@/hooks/houses/useGetListHouse";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { Routes } from "@/lib/constant";
 import { cn } from "@/lib/utils";
 import { Home, Pencil, Plus } from "lucide-react";
@@ -11,6 +11,8 @@ import AddHouseButton from "./AddHouseButton";
 import AddRoomButton from "./AddRoomButton";
 
 const SidebarHouseList = () => {
+  const router = useRouter()
+
   const { data, isFetching, } = useGetHouse();
 
 
@@ -42,6 +44,7 @@ const SidebarHouseList = () => {
           return (
             <div
               // href={`${Routes.house(house.id)}`}
+              onClick={() => router.push(`${Routes.house(house.id)}`)}
               key={house.id}
               className={cn(
                 "flex items-center relative justify-between group gap-2.5 w-full text-sm py-3.5 px-3 pl-8 hover:bg-neutral-90/60 hover:text-primary-60",

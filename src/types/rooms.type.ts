@@ -1,3 +1,5 @@
+import { PaginationParams } from ".";
+
 export interface Room {
   id: string;
   name: string;
@@ -14,6 +16,12 @@ export interface Room {
   cleaning_fee?: number;
   createdAt: Date;
   updatedAt: Date;
+  paymentDate?: Date;
+  status?: {
+    id: number;
+    name: string;
+    color: string;
+  };
 }
 
 export interface CreateRoomDto {
@@ -29,4 +37,9 @@ export interface CreateRoomDto {
   living_fee?: number;
   parking_fee?: number;
   cleaning_fee?: number;
+}
+
+
+export interface GetRoomByHouse extends PaginationParams {
+  house: string
 }

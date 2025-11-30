@@ -1,25 +1,15 @@
 "use client";
 
-import InputField from "@/components/common/fields/InputField";
-import NumericFormatField from "@/components/common/fields/NumericFormatField";
-import TextareaField from "@/components/common/fields/TextareaField";
-import { SpinIcon } from "@/components/icons";
-import { Button } from "@/components/ui";
+import AddRoomForm from "@/app/[locale]/(owner)/components/rooms/AddRoomForm";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Form } from "@/components/ui/form";
-import useRoomMutation from "@/hooks/rooms/useRoomMutation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Pencil } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import AddRoomForm from "../rooms/AddRoomForm";
+import { useState } from "react";
 
 interface CreateRoomDto {
   name: string;
@@ -52,14 +42,17 @@ const AddRoomButton = ({ houseId }: AddRoomButtonProps) => {
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={onOpenChange}>
-      <Pencil
+      <button
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
           setIsDialogOpen(true);
         }}
-        className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary-60"
-      />
+        className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+      >
+        <Plus className="w-4 h-4" />
+        Add Room
+      </button>
 
       <DialogContent
         className="sm:max-w-[unset] w-fit max-h-[90vh] overflow-y-auto"

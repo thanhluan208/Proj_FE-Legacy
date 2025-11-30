@@ -29,7 +29,13 @@ export interface Room {
   };
   size_sq_m: number;
   base_rent: number;
-  houseId: string;
+  fees?: {
+    electricity_price: number;
+    water_price: number;
+    internet_price: number;
+    service_price: number;
+  };
+  contractDate?: number; // 1-31
 }
 
 export interface MonthlyFinancial {
@@ -65,6 +71,13 @@ const MOCK_ROOMS: Room[] = Array.from({ length: 8 }).map((_, i) => ({
   size_sq_m: 25 + (i % 3) * 5,
   base_rent: 5000000 + (i % 3) * 500000,
   houseId: '123e4567-e89b-12d3-a456-426614174000',
+  fees: {
+    electricity_price: 3500,
+    water_price: 20000,
+    internet_price: 150000,
+    service_price: 100000,
+  },
+  contractDate: Math.floor(Math.random() * 28) + 1, // Random date 1-28 to avoid month length issues
 }));
 
 const MOCK_FINANCIALS: MonthlyFinancial[] = [

@@ -1,11 +1,12 @@
 import { api } from "@/lib/apiHelpers";
-import { PaginationParams, PaginationResponse } from "@/types";
-import { CreateRoomDto, Room } from "@/types/rooms.type";
+import { queryStringify } from "@/lib/utils";
+import { PaginationResponse } from "@/types";
+import { CreateRoomDto, GetRoomByHouse, Room } from "@/types/rooms.type";
 
 export const getRooms = async (
-  payload?: PaginationParams
+  payload?: GetRoomByHouse
 ): Promise<PaginationResponse<Room>> => {
-  return api.get(`/rooms?`).then((res) => res.data);
+  return api.get(`/rooms?${queryStringify(payload)}`).then((res) => res.data);
 };
 
 export const createRoom = async (data: CreateRoomDto): Promise<Room> => {

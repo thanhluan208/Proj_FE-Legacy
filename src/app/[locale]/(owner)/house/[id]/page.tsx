@@ -1,11 +1,18 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { House, Room, MonthlyFinancial, getHouseDetail, getRooms, getFinancialSummary } from './mock-data';
-import HouseInfoCard from './components/HouseInfoCard';
-import RoomList from './components/RoomList';
-import FinancialSummary from './components/FinancialSummary';
-import { Loader2 } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import {
+  House,
+  Room,
+  MonthlyFinancial,
+  getHouseDetail,
+  getRooms,
+  getFinancialSummary,
+} from "./mock-data";
+import HouseInfoCard from "./components/HouseInfoCard";
+import FinancialSummary from "./components/FinancialSummary";
+import { Loader2 } from "lucide-react";
+import RoomList from "./components/room-list/RoomList";
 
 interface PageProps {
   params: {
@@ -15,7 +22,6 @@ interface PageProps {
 
 export default function HouseDetailPage({ params }: PageProps) {
   const [house, setHouse] = useState<House | null>(null);
-  const [rooms, setRooms] = useState<Room[]>([]);
   const [financials, setFinancials] = useState<MonthlyFinancial[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,10 +35,9 @@ export default function HouseDetailPage({ params }: PageProps) {
         ]);
 
         setHouse(houseData);
-        setRooms(roomsData);
         setFinancials(financialData);
       } catch (error) {
-        console.error('Failed to fetch house details:', error);
+        console.error("Failed to fetch house details:", error);
       } finally {
         setLoading(false);
       }
@@ -58,10 +63,10 @@ export default function HouseDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 space-y-8">
+    <div className="flex-1 mx-auto pb-8 px-4 space-y-8">
       <HouseInfoCard house={house} />
+      <RoomList />
       <FinancialSummary data={financials} />
-      <RoomList rooms={rooms} />
     </div>
   );
 }

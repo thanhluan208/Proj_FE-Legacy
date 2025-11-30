@@ -8,7 +8,7 @@ interface HouseInfoCardProps {
 
 const HouseInfoCard: React.FC<HouseInfoCardProps> = ({ house }) => {
   return (
-    <div className="bg-card text-card-foreground rounded-2xl shadow-md p-8">
+    <div className="bg-card text-card-foreground rounded-2xl shadow-md p-4">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h1 className="text-2xl font-bold text-foreground">{house.name}</h1>
