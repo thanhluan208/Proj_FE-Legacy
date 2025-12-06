@@ -1,4 +1,4 @@
-import AddTenantForm from "@/app/[locale]/(owner)/components/tenants/AddTenantForm";
+import AddOrEditTenantForm from "@/app/[locale]/(owner)/components/tenants/AddOrEditTenantForm";
 import { Button } from "@/components/ui";
 import {
   Dialog,
@@ -20,7 +20,12 @@ const AddTenantButton: FC<AddTenantButtonProps> = ({ houseId, roomId }) => {
 
   return (
     <Fragment>
-      <Button onClick={() => setOpen(true)} size="sm" className="gap-2 w-fit">
+      <Button
+        variant="ghost"
+        onClick={() => setOpen(true)}
+        size="sm"
+        className="justify-start gap-2 w-full"
+      >
         <UserPlus className="w-4 h-4" />
         Add Tenant
       </Button>
@@ -32,7 +37,7 @@ const AddTenantButton: FC<AddTenantButtonProps> = ({ houseId, roomId }) => {
           </DialogHeader>
 
           {open && (
-            <AddTenantForm
+            <AddOrEditTenantForm
               setIsDialogOpen={setOpen}
               houseId={houseId}
               roomId={roomId}

@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import useTenantMutation from "@/hooks/tenants/useTenantMutation";
-import { CreateTenantDto } from "@/types/tenants.type";
+import { CreateTenantDto, Tenant } from "@/types/tenants.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import React, { FC } from "react";
@@ -23,15 +23,17 @@ interface AddTenantFormProps {
   setIsDialogOpen: (open: boolean) => void;
   houseId: string;
   roomId: string;
+  data?: Tenant;
 }
 
-const AddTenantForm: FC<AddTenantFormProps> = ({
+const AddOrEditTenantForm: FC<AddTenantFormProps> = ({
   setIsDialogOpen,
   houseId,
   roomId,
+  data,
 }) => {
   const t = useTranslations("tenant");
-  const { createTenant } = useTenantMutation();
+  const { createTenant, editTenant } = useTenantMutation();
   const isPending = createTenant.isPending;
 
   const addTenantSchema = z.object({
@@ -52,29 +54,38 @@ const AddTenantForm: FC<AddTenantFormProps> = ({
   const form = useForm<z.infer<typeof addTenantSchema>>({
     resolver: zodResolver(addTenantSchema),
     defaultValues: {
-      name: "",
-      address: "",
-      phoneNumber: "",
-      citizenId: "",
-      sex: "",
-      nationality: "",
-      home: "",
-      issueLoc: "",
-      tenantJob: "",
-      tenantWorkAt: "",
+      name: data?.name || "",
+      address: data?.address || "",
+      phoneNumber: data?.phoneNumber || "",
+      citizenId: data?.citizenId || "",
+      sex: data?.sex || "",
+      nationality: data?.nationality || "",
+      home: data?.home || "",
+      issueLoc: data?.issueLoc || "",
+      tenantJob: data?.tenantJob || "",
+      tenantWorkAt: data?.tenantWorkAt || "",
+      dob: data?.dob ? new Date(data.dob) : undefined,
+      issueDate: data?.issueDate ? new Date(data.issueDate) : undefined,
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof addTenantSchema>) => {
+  const onSubmit = async (submitData: z.infer<typeof addTenantSchema>) => {
     const payload: CreateTenantDto = {
-      ...data,
+      ...submitData,
       house: houseId,
       room: roomId,
-      dob: data.dob?.toISOString(),
-      issueDate: data.issueDate?.toISOString(),
+      dob: submitData.dob?.toISOString(),
+      issueDate: submitData.issueDate?.toISOString(),
     };
 
-    const response = await createTenant.mutateAsync(payload);
+    let response: any = null;
+    if (data) {
+      const { house, room, ...rest } = payload;
+      response = await editTenant.mutateAsync({ ...rest, id: data.id });
+    } else {
+      response = await createTenant.mutateAsync(payload);
+    }
+
     if (response) {
       setIsDialogOpen(false);
     }
@@ -214,7 +225,7 @@ const AddTenantForm: FC<AddTenantFormProps> = ({
           />
         </div>
 
-        <div className="flex gap-3 mt-6">
+        <div className="flex gap-3 mt-6 sticky bottom-0 bg-neutral-100 ">
           <Button
             type="button"
             variant="outline"
@@ -226,7 +237,13 @@ const AddTenantForm: FC<AddTenantFormProps> = ({
           </Button>
 
           <Button disabled={isPending} type="submit" className="flex-1">
-            {isPending ? <SpinIcon /> : t("form.submit")}
+            {isPending ? (
+              <SpinIcon />
+            ) : data ? (
+              t("form.save")
+            ) : (
+              t("form.submit")
+            )}
           </Button>
         </div>
       </form>
@@ -234,4 +251,4 @@ const AddTenantForm: FC<AddTenantFormProps> = ({
   );
 };
 
-export default AddTenantForm;
+export default AddOrEditTenantForm;

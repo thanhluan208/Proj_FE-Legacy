@@ -13,7 +13,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { format } from "date-fns";
-import { useRouter } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { Routes } from "@/lib/constant";
 
 interface RoomCardProps {
@@ -72,11 +72,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
   const statusConfig = getStatusConfig();
 
   return (
-    <div
-      onClick={() => router.push(`${Routes.room(room.id)}`)}
-      className="rounded-xl p-5 cursor-pointer hover:shadow-lg transition-all shadow-sm duration-300 bg-accent/30 hover:bg-accent/50 group relative overflow-hidden"
-    >
-      {/* Action Buttons (Show on Hover) */}
+    <div className="rounded-xl p-5 cursor-pointer hover:shadow-lg transition-all shadow-sm duration-300 bg-accent/30 hover:bg-accent/50 group relative overflow-hidden">
       <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
         <button
           className="p-1.5 hover:bg-background rounded-full text-muted-foreground hover:text-primary transition-colors"
@@ -92,7 +88,6 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
         </button>
       </div>
 
-      {/* Status Badge (Hide on Hover) */}
       <div className="absolute top-4 right-4 transition-opacity group-hover:opacity-0 duration-200">
         <span
           className={`text-xs px-2 py-1 rounded-full font-medium ${statusConfig.className}`}
@@ -102,10 +97,13 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
       </div>
 
       <div className="flex justify-between items-start mb-2 mt-1">
-        <div className="flex items-center">
+        <Link
+          href={Routes.room(room.id)}
+          className="flex hover:underline items-center hover:text-primary transition-colors"
+        >
           <Home className="w-5 h-5 text-secondary mr-2" />
           <h3 className="font-semibold">{room.name}</h3>
-        </div>
+        </Link>
       </div>
 
       <p className="text-sm text-muted-foreground mb-3 line-clamp-1">

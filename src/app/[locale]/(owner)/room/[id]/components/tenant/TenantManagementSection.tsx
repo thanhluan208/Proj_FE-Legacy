@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
-import { Tenant } from "@/types/tenants.type";
-import TenantCard from "./TenantCard";
-import TenantTable from "./TenantTable";
-import TenantFilter, { TenantFilterValues } from "./TenantFilter";
-import { useMasonry } from "@/hooks/useMasonry";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { LayoutGrid, List, Filter } from "lucide-react";
 import Pagination from "@/components/ui/pagination";
 import { useGetListTenant } from "@/hooks/tenants/useGetListTenant";
+import { useMasonry } from "@/hooks/useMasonry";
+import { Tenant } from "@/types/tenants.type";
+import { LayoutGrid, List } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useMemo, useState } from "react";
+import TenantCard from "./TenantCard";
+import TenantFilter, { TenantFilterValues } from "./TenantFilter";
+import TenantTable from "./TenantTable";
 
 interface TenantManagementSectionProps {
   tenants: Tenant[];
@@ -19,9 +20,9 @@ interface TenantManagementSectionProps {
 type ViewMode = "card" | "table";
 
 const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
-  tenants,
   roomId,
 }) => {
+  const t = useTranslations("tenant.management");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -43,7 +44,8 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
   const pageSize = filters.pageSize || 10;
   const currentPage = filters?.page || 1;
 
-  const {} = useGetListTenant(filters);
+  const { data, isFetching } = useGetListTenant(filters);
+  const tenants = data?.data || [];
 
   // Update URL with new filters
   const updateFilters = (newFilters: Partial<TenantFilterValues>) => {
@@ -152,13 +154,12 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
         <div className="flex items-center gap-3">
           <div className="h-12 w-1 bg-primary rounded-full" />
           <div>
-            <h2 className="text-2xl font-bold text-foreground">
-              Tenant Management
-            </h2>
+            <h2 className="text-2xl font-bold text-foreground">{t("title")}</h2>
             <p className="text-sm text-muted-foreground">
-              {filteredTenants.length} tenant
-              {filteredTenants.length !== 1 ? "s" : ""}
-              {hasActiveFilters && " (filtered)"}
+              {filteredTenants.length === 1
+                ? t("count", { count: filteredTenants.length })
+                : t("countPlural", { count: filteredTenants.length })}
+              {hasActiveFilters && t("filtered")}
             </p>
           </div>
         </div>
@@ -175,7 +176,7 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              All
+              {t("all")}
             </button>
             <button
               onClick={() => handleQuickFilter("active")}
@@ -185,7 +186,7 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              Active
+              {t("active")}
             </button>
             <button
               onClick={() => handleQuickFilter("inactive")}
@@ -195,7 +196,7 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              Inactive
+              {t("inactive")}
             </button>
           </div>
 
@@ -208,7 +209,7 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"
               }`}
-              title="Card View"
+              title={t("cardView")}
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
@@ -219,7 +220,7 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"
               }`}
-              title="Table View"
+              title={t("tableView")}
             >
               <List className="w-4 h-4" />
             </button>
@@ -233,13 +234,13 @@ const TenantManagementSection: React.FC<TenantManagementSectionProps> = ({
       {/* Tenant List */}
       {paginatedTenants.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No tenants found</p>
+          <p className="text-muted-foreground">{t("noTenantsFound")}</p>
           {hasActiveFilters && (
             <button
               onClick={() => handleFilterApply({})}
               className="mt-2 text-primary hover:underline"
             >
-              Clear filters
+              {t("clearFilters")}
             </button>
           )}
         </div>

@@ -2,12 +2,14 @@
 
 import React from "react";
 import { Tenant } from "@/types/tenants.type";
+import { useTranslations } from "next-intl";
 
 interface TenantTableProps {
   tenants: Tenant[];
 }
 
 const TenantTable: React.FC<TenantTableProps> = ({ tenants }) => {
+  const t = useTranslations("tenant.table");
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
@@ -41,22 +43,22 @@ const TenantTable: React.FC<TenantTableProps> = ({ tenants }) => {
         <thead>
           <tr className="border-b border-border">
             <th className="text-left py-3 px-4 text-sm font-semibold text-foreground">
-              Name
+              {t("name")}
             </th>
             <th className="text-left py-3 px-4 text-sm font-semibold text-foreground">
-              Contact
+              {t("contact")}
             </th>
             <th className="text-left py-3 px-4 text-sm font-semibold text-foreground">
-              Citizen ID
+              {t("citizenId")}
             </th>
             <th className="text-left py-3 px-4 text-sm font-semibold text-foreground">
-              Job
+              {t("job")}
             </th>
             <th className="text-left py-3 px-4 text-sm font-semibold text-foreground">
-              Status
+              {t("status")}
             </th>
             <th className="text-left py-3 px-4 text-sm font-semibold text-foreground">
-              Joined Date
+              {t("joinedDate")}
             </th>
           </tr>
         </thead>

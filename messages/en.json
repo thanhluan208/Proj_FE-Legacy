@@ -213,7 +213,57 @@
       "tenantWorkAt": "Workplace",
       "tenantWorkAtPlaceholder": "Enter workplace",
       "cancel": "Cancel",
-      "submit": "Add Tenant"
+      "submit": "Add Tenant",
+      "save": "Save"
+    },
+    "card": {
+      "notAvailable": "N/A",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "nationality": "Nationality",
+      "hometown": "Hometown",
+      "joined": "Joined",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "editLabel": "Edit tenant"
+    },
+    "editDialog": {
+      "title": "Edit {name} info",
+      "description": "Make changes to {name}'s profile here. Click submit when you're done."
+    },
+    "filter": {
+      "button": "Filter",
+      "title": "Filter Tenants",
+      "status": "Status",
+      "allStatuses": "All Statuses",
+      "active": "Active",
+      "inactive": "Inactive",
+      "dateRange": "Joined Date Range",
+      "from": "From",
+      "to": "To",
+      "apply": "Apply Filters",
+      "clear": "Clear All"
+    },
+    "table": {
+      "name": "Name",
+      "contact": "Contact",
+      "citizenId": "Citizen ID",
+      "job": "Job",
+      "status": "Status",
+      "joinedDate": "Joined Date"
+    },
+    "management": {
+      "title": "Tenant Management",
+      "count": "{count} tenant",
+      "countPlural": "{count} tenants",
+      "filtered": " (filtered)",
+      "noTenantsFound": "No tenants found",
+      "clearFilters": "Clear filters",
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive",
+      "cardView": "Card View",
+      "tableView": "Table View"
     },
     "gender": {
       "male": "Male",
@@ -222,7 +272,22 @@
     },
     "messages": {
       "createSuccess": "Tenant has been added successfully!",
-      "createError": "Failed to add tenant. Please try again."
+      "createError": "Failed to add tenant. Please try again.",
+      "updateSuccess": "Tenant information has been updated successfully!",
+      "updateError": "Failed to update tenant information. Please try again.",
+      "toggleStatusSuccess": "Tenant status has been changed successfully!",
+      "toggleStatusError": "Failed to change tenant status. Please try again.",
+      "deleteSuccess": "Tenant has been deleted successfully!",
+      "deleteError": "Failed to delete tenant. Please try again."
+    },
+    "deleteConfirmation": {
+      "title": "Delete Tenant",
+      "description": "Are you sure you want to delete this tenant? This action cannot be undone.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "actions": {
+      "delete": "Delete"
     }
   }
 }

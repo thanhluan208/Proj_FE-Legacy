@@ -213,7 +213,57 @@
       "tenantWorkAt": "Nơi Làm Việc",
       "tenantWorkAtPlaceholder": "Nhập nơi làm việc",
       "cancel": "Hủy",
-      "submit": "Thêm Người Thuê"
+      "submit": "Thêm Người Thuê",
+      "save": "Lưu"
+    },
+    "card": {
+      "notAvailable": "N/A",
+      "dateOfBirth": "Ngày sinh",
+      "gender": "Giới tính",
+      "nationality": "Quốc tịch",
+      "hometown": "Quê quán",
+      "joined": "Đã tham gia",
+      "activate": "Kích hoạt",
+      "deactivate": "Hủy kích hoạt",
+      "editLabel": "Chỉnh sửa người thuê"
+    },
+    "editDialog": {
+      "title": "Chỉnh sửa thông tin {name}",
+      "description": "Thay đổi thông tin hồ sơ của {name} tại đây. Nhấn gửi khi hoàn tất."
+    },
+    "filter": {
+      "button": "Bộ lọc",
+      "title": "Lọc người thuê",
+      "status": "Trạng thái",
+      "allStatuses": "Tất cả trạng thái",
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động",
+      "dateRange": "Ngày tham gia",
+      "from": "Từ",
+      "to": "Đến",
+      "apply": "Áp dụng bộ lọc",
+      "clear": "Xóa tất cả"
+    },
+    "table": {
+      "name": "Tên",
+      "contact": "Liên hệ",
+      "citizenId": "CMND/CCCD",
+      "job": "Nghề nghiệp",
+      "status": "Trạng thái",
+      "joinedDate": "Ngày tham gia"
+    },
+    "management": {
+      "title": "Quản lý người thuê",
+      "count": "{count} người thuê",
+      "countPlural": "{count} người thuê",
+      "filtered": " (đã lọc)",
+      "noTenantsFound": "Không tìm thấy người thuê nào",
+      "clearFilters": "Xóa bộ lọc",
+      "all": "Tất cả",
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động",
+      "cardView": "Xem dạng thẻ",
+      "tableView": "Xem dạng bảng"
     },
     "gender": {
       "male": "Nam",
@@ -222,7 +272,22 @@
     },
     "messages": {
       "createSuccess": "Người thuê đã được thêm thành công!",
-      "createError": "Thêm người thuê thất bại. Vui lòng thử lại."
+      "createError": "Thêm người thuê thất bại. Vui lòng thử lại.",
+      "updateSuccess": "Thông tin người thuê đã được cập nhật thành công!",
+      "updateError": "Cập nhật thông tin người thuê thất bại. Vui lòng thử lại.",
+      "toggleStatusSuccess": "Trạng thái người thuê đã được thay đổi thành công!",
+      "toggleStatusError": "Thay đổi trạng thái người thuê thất bại. Vui lòng thử lại.",
+      "deleteSuccess": "Người thuê đã được xóa thành công!",
+      "deleteError": "Xóa người thuê thất bại. Vui lòng thử lại."
+    },
+    "deleteConfirmation": {
+      "title": "Xóa người thuê",
+      "description": "Bạn có chắc chắn muốn xóa người thuê này? Hành động này không thể hoàn tác.",
+      "confirm": "Xóa",
+      "cancel": "Hủy"
+    },
+    "actions": {
+      "delete": "Xóa"
     }
   }
 }

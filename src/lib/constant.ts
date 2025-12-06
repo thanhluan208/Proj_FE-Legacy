@@ -33,10 +33,15 @@ export const Routes = {
 
 export const QueryKeys = {
   HOUSE_LIST: "HOUSE_LIST",
+
   ROOM_LIST: "ROOM_LIST",
+
   ROOM_DETAIL: "ROOM_DETAIL",
+
   BILLING_LIST: "BILLING_LIST",
+
   TENANT_LIST: "TENANT_LIST",
+  TENANT_DETAIL: "TENANT_DETAIL",
 };
 
 export const TIME_IN_SECONDS = {

@@ -1,9 +1,5 @@
 export interface Tenant {
   id: string;
-  room: {
-    id: string;
-    name: string;
-  };
   name: string;
   phoneNumber?: string;
   dob?: Date;
@@ -21,7 +17,6 @@ export interface Tenant {
   status?: {
     id: number;
     name: string;
-    color?: string;
   };
   createdAt: Date;
   updatedAt: Date;

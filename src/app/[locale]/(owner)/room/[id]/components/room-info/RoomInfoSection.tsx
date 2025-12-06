@@ -4,10 +4,17 @@ import { useGetRoomDetail } from "@/hooks/rooms/useGetRoomDetail";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
   Building2,
   CreditCard,
   DollarSign,
+  FilePlus,
   FileText,
+  MoreVertical,
   Receipt,
   Ruler,
   TrendingUp,
@@ -16,6 +23,7 @@ import {
 } from "lucide-react";
 import { useParams } from "next/navigation";
 import AddTenantButton from "./AddTenantButton";
+import ContractAddButton from "../contract/ContractAddButton";
 
 const RoomInfoSection = () => {
   const params = useParams();
@@ -107,17 +115,40 @@ const RoomInfoSection = () => {
           <div className="h-12 w-1 bg-primary rounded-full" />
           <h2 className="text-2xl font-bold text-foreground">Room Details</h2>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="gap-2 w-fit">
-            <Receipt className="w-4 h-4" />
-            Create Bill
-          </Button>
-          <Button variant="outline" size="sm" className="gap-2 w-fit">
-            <FileText className="w-4 h-4" />
-            Create Expense
-          </Button>
-          <AddTenantButton houseId={room.house.id} roomId={room.id} />
-        </div>
+
+        {/* Actions Popover */}
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="default" size="sm" className="gap-2 w-fit">
+              <MoreVertical className="w-4 h-4" />
+              Actions
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-56 p-2" align="end">
+            <div className="flex flex-col gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="justify-start gap-2 w-full"
+              >
+                <Receipt className="w-4 h-4" />
+                Create Bill
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="justify-start gap-2 w-full"
+              >
+                <FileText className="w-4 h-4" />
+                Create Expense
+              </Button>
+              <ContractAddButton />
+              <div className="pt-1 border-t border-border">
+                <AddTenantButton houseId={room.house.id} roomId={room.id} />
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
       </div>
 
       {/* Main Info Section */}

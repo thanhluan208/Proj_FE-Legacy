@@ -219,6 +219,10 @@
   --color-neutral-90: var(--neutral-90);
   --color-neutral-100: var(--neutral-100);
   --color-neutral-foreground: var(--neutral-foreground);
+
+  /* Accordion animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
 /* Utility classes */
@@ -230,5 +234,24 @@
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+}
+
+/* Accordion keyframes */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
   }
 }

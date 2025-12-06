@@ -11,10 +11,9 @@ import AddHouseButton from "./AddHouseButton";
 import AddRoomButton from "./AddRoomButton";
 
 const SidebarHouseList = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const { data, isFetching, } = useGetHouse();
-
+  const { data, isFetching } = useGetHouse();
 
   return (
     <div className="rounded-xl  items-center flex-col flex bg-neutral-100 overflow-hidden hover:shadow-sm transition-shadow">
@@ -23,7 +22,7 @@ const SidebarHouseList = () => {
         <AddHouseButton />
       </div>
 
-      {(isFetching) &&
+      {isFetching &&
         [1, 2, 3].map((_, index) => {
           return (
             <div
@@ -43,17 +42,15 @@ const SidebarHouseList = () => {
         data?.data?.map((house, index) => {
           return (
             <div
-              // href={`${Routes.house(house.id)}`}
-              onClick={() => router.push(`${Routes.house(house.id)}`)}
               key={house.id}
               className={cn(
-                "flex items-center relative justify-between group gap-2.5 w-full text-sm py-3.5 px-3 pl-8 hover:bg-neutral-90/60 hover:text-primary-60",
+                "flex items-center hover:underline cursor-pointer relative justify-between group gap-2.5 w-full text-sm py-3.5 px-3 pl-8 hover:bg-neutral-90/60 hover:text-primary-60",
                 index !== 0 && "border-t border-neutral-90/20"
               )}
             >
               <div className="flex items-center gap-2.5">
                 {<Home className="w-4 h-4" />}
-                <p>{house.name}</p>
+                <Link href={`${Routes.house(house.id)}`}>{house.name}</Link>
               </div>
 
               <AddRoomButton houseId={house.id} />

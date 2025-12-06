@@ -15,7 +15,7 @@ const AUTHEN_ROUTES = [
   "/forgot-password",
   "/reset-password",
 ];
-const PRIVATE_ROUTES = ["/dashboard"];
+const PRIVATE_ROUTES = ["/dashboard", "/room", "/house"];
 
 // Token names
 
@@ -199,11 +199,20 @@ export default async function middleware(request: NextRequest) {
             console.log(
               `[MIDDLEWARE DEBUG] Refresh failed on private route - clearing tokens and redirecting to login`
             );
-            const response = NextResponse.next();
-            removeAuthCookie(response);
-            return NextResponse.redirect(
-              new URL(`/${locale || "en"}/login`, request.url)
-            );
+            // Check if already on login page to prevent /login/login redirect
+            if (!isAuthRoute) {
+              const response = NextResponse.redirect(
+                new URL(`/${locale || "en"}/login`, request.url)
+              );
+              removeAuthCookie(response);
+              return response;
+            } else {
+              // Already on auth route, just clear cookies and continue
+              const handleI18nRouting = createMiddleware(routing);
+              const response = handleI18nRouting(request);
+              removeAuthCookie(response);
+              return response;
+            }
           }
 
           // For non-private routes, clear tokens but allow access to public content
@@ -221,17 +230,25 @@ export default async function middleware(request: NextRequest) {
         );
 
         // LOGIC: Handle refresh errors by clearing authentication state
-        const response = NextResponse.next();
-        removeAuthCookie(response);
-
         // Redirect private routes to login when refresh fails
         if (isPrivateRoute) {
           console.log(
             `[MIDDLEWARE DEBUG] Refresh error on private route - redirecting to login`
           );
-          return NextResponse.redirect(
-            new URL(`/${locale || "en"}/login`, request.url)
-          );
+          // Check if already on login page to prevent /login/login redirect
+          if (!isAuthRoute) {
+            const redirectResponse = NextResponse.redirect(
+              new URL(`/${locale || "en"}/login`, request.url)
+            );
+            removeAuthCookie(redirectResponse);
+            return redirectResponse;
+          } else {
+            // Already on auth route, just clear cookies and continue
+            const handleI18nRouting = createMiddleware(routing);
+            const response = handleI18nRouting(request);
+            removeAuthCookie(response);
+            return response;
+          }
         }
         // Allow continued access to public routes even after refresh error
         console.log(
@@ -244,17 +261,25 @@ export default async function middleware(request: NextRequest) {
       );
 
       // SCENARIO 3: Both tokens expired/invalid OR refresh token expired - complete authentication failure
-      const response = NextResponse.next();
-      removeAuthCookie(response);
-
       // LOGIC: Force re-authentication for private routes when no valid tokens exist
       if (isPrivateRoute) {
         console.log(
           `[MIDDLEWARE DEBUG] Both tokens invalid on private route - forcing re-authentication`
         );
-        return NextResponse.redirect(
-          new URL(`/${locale || "en"}/login`, request.url)
-        );
+        // Check if already on login page to prevent /login/login redirect
+        if (!isAuthRoute) {
+          const redirectResponse = NextResponse.redirect(
+            new URL(`/${locale || "en"}/login`, request.url)
+          );
+          removeAuthCookie(redirectResponse);
+          return redirectResponse;
+        } else {
+          // Already on auth route, just clear cookies and continue
+          const handleI18nRouting = createMiddleware(routing);
+          const response = handleI18nRouting(request);
+          removeAuthCookie(response);
+          return response;
+        }
       }
       // Allow access to public content even without valid authentication
       console.log(
@@ -271,9 +296,17 @@ export default async function middleware(request: NextRequest) {
       console.log(
         `[MIDDLEWARE DEBUG] Unauthenticated user attempting private route access - redirecting to login`
       );
-      return NextResponse.redirect(
-        new URL(`/${locale || "en"}/login`, request.url)
-      );
+      // Check if already on login page to prevent /login/login redirect
+      if (!isAuthRoute) {
+        return NextResponse.redirect(
+          new URL(`/${locale || "en"}/login`, request.url)
+        );
+      } else {
+        // Already on auth route, allow access
+        console.log(
+          `[MIDDLEWARE DEBUG] Already on auth route, allowing access`
+        );
+      }
     }
     // Allow unauthenticated access to public and auth routes
     console.log(

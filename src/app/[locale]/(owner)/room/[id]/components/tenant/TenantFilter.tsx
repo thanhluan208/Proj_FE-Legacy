@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Filter, X } from "lucide-react";
 import { PaginationParams } from "@/types";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export interface TenantFilterValues extends PaginationParams {
   room: string;
@@ -13,6 +14,7 @@ export interface TenantFilterValues extends PaginationParams {
 }
 
 const TenantFilter = ({}) => {
+  const t = useTranslations("tenant.filter");
   const searchParams = useSearchParams();
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -45,7 +47,7 @@ const TenantFilter = ({}) => {
         }`}
       >
         <Filter className="w-4 h-4" />
-        <span className="hidden sm:inline">Filter</span>
+        <span className="hidden sm:inline">{t("button")}</span>
         {hasActiveFilters && (
           <span className="bg-primary-foreground text-primary text-xs px-1.5 py-0.5 rounded-full font-bold">
             {Object.values(internalFilter).filter((v) => v).length}
@@ -64,7 +66,7 @@ const TenantFilter = ({}) => {
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-border">
                 <h3 className="text-xl font-bold text-foreground">
-                  Filter Tenants
+                  {t("title")}
                 </h3>
                 <button
                   onClick={onClose}
@@ -79,7 +81,7 @@ const TenantFilter = ({}) => {
                 {/* Status Filter */}
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Status
+                    {t("status")}
                   </label>
                   <select
                     value={internalFilter.status || ""}
@@ -91,21 +93,21 @@ const TenantFilter = ({}) => {
                     }
                     className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   >
-                    <option value="">All Statuses</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="">{t("allStatuses")}</option>
+                    <option value="active">{t("active")}</option>
+                    <option value="inactive">{t("inactive")}</option>
                   </select>
                 </div>
 
                 {/* Date Range Filter */}
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Joined Date Range
+                    {t("dateRange")}
                   </label>
                   <div className="space-y-3">
                     <div>
                       <label className="block text-xs text-muted-foreground mb-1">
-                        From
+                        {t("from")}
                       </label>
                       <input
                         type="date"
@@ -121,7 +123,7 @@ const TenantFilter = ({}) => {
                     </div>
                     <div>
                       <label className="block text-xs text-muted-foreground mb-1">
-                        To
+                        {t("to")}
                       </label>
                       <input
                         type="date"
@@ -145,13 +147,13 @@ const TenantFilter = ({}) => {
                   onClick={handleApply}
                   className="w-full px-4 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
                 >
-                  Apply Filters
+                  {t("apply")}
                 </button>
                 <button
                   onClick={handleClear}
                   className="w-full px-4 py-3 bg-accent text-foreground rounded-lg font-medium hover:bg-accent/80 transition-colors"
                 >
-                  Clear All
+                  {t("clear")}
                 </button>
               </div>
             </div>

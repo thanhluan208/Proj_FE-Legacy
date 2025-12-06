@@ -111,8 +111,9 @@ class ApiInstance {
         if (!response.ok) {
           // Handle specific HTTP errors
           if (response.status === 401) {
-            // Unauthorized - redirect to login
-            redirect("/login");
+            // Unauthorized - redirect to login with proper i18n routing
+            const { redirect: i18nRedirect } = await import("@/i18n/routing");
+            i18nRedirect({ href: "/login", locale: "en" as any });
           }
 
           return {
